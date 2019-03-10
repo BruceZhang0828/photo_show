@@ -55,19 +55,19 @@ public class UserController {
      * 登录
      */
     @PostMapping("/login")
-    public Response update(@RequestBody LoginDTO loginDTO) {
+    public Response<UserEntity> update(@RequestBody LoginDTO loginDTO) {
         ValidatorUtils.validateEntity(loginDTO);
         EntityWrapper<UserEntity> wrapper = new EntityWrapper<>();
         wrapper.eq("username", loginDTO.getUsername());
         UserEntity user = userService.selectOne(wrapper);
         if(user == null){
-            return new Response("0", "用户不存在");
+            return new Response<>("0", "用户不存在");
         }
         String password = DigestUtils.sha256Hex(loginDTO.getPassword());
         if(!user.getPassword().equals(password)){
-            return new Response("0", "密码错误");
+            return new Response<>("0", "密码错误");
         }
-        return new Response("1", "登录成功");
+        return new Response<>("1", "登录成功", user);
     }
 
 }
