@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="../static/assets/css/fornt_login.css">
+</head>
+<body>
+<div class="login-main">
+    <header class="layui-elip">后台登录</header>
+    <form class="layui-form-item" name="form1" method="post" action="login.php">
+        <div class="line1">
+            <input type="text" name="account" required  lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input">
+        </div>
+        <div class="line1">
+            <input type="password" name="pwd" required  lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
+        </div>
+        <div class="line1 login-btn">
+            <button type="submit" class="layui-btn" name="btn1" value="登录">登录</button>
+            <button type="reset" class="layui-btn layui-btn-normal" name="btn2" value="重置">重置</button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    layui.use('form', function () {
+        var form = layui.form, $ = layui.jquery;
+    });
+</script>
+</body>
+</html>
