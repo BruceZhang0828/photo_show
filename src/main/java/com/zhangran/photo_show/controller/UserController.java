@@ -11,6 +11,7 @@ import com.zhangran.photo_show.utils.ValidatorUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,10 +33,16 @@ public class UserController {
     /**
      * 保存
      */
-    @RequestMapping("/register")
+    @PostMapping("/register")
     public Response save(@RequestBody RegisterDTO registerDTO) {
         //表单校验
         ValidatorUtils.validateEntity(registerDTO);
+        EntityWrapper<UserEntity> wrapper = new EntityWrapper<>();
+        wrapper.eq("username", registerDTO.getUsername());
+        UserEntity user = userService.selectOne(wrapper);
+        if(user != null){
+            return new Response("0", "用户名已存在");
+        }
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(registerDTO, userEntity);
         userEntity.setPassword(DigestUtils.sha256Hex(userEntity.getPassword()));
@@ -47,7 +54,7 @@ public class UserController {
     /**
      * 登录
      */
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public Response update(@RequestBody LoginDTO loginDTO) {
         ValidatorUtils.validateEntity(loginDTO);
         EntityWrapper<UserEntity> wrapper = new EntityWrapper<>();
