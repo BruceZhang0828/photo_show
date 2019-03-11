@@ -3,6 +3,7 @@ package com.zhangran.photo_show.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.zhangran.photo_show.entity.UserEntity;
+import com.zhangran.photo_show.form.ChangePasswordDTO;
 import com.zhangran.photo_show.form.LoginDTO;
 import com.zhangran.photo_show.form.RegisterDTO;
 import com.zhangran.photo_show.service.UserService;
@@ -12,7 +13,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,10 +33,10 @@ public class UserController {
 
 
     /**
-     * 保存
+     * 注册
      */
     @PostMapping("/register")
-    public Response save(RegisterDTO registerDTO) {
+    public Response ave(RegisterDTO registerDTO) {
         //表单校验
         ValidatorUtils.validateEntity(registerDTO);
         EntityWrapper<UserEntity> wrapper = new EntityWrapper<>();
@@ -74,4 +74,21 @@ public class UserController {
         return response;
     }
 
+    /**
+     * 修改密码
+     */
+    @PostMapping("/changePassword")
+    public Response changePassword(ChangePasswordDTO passwordDTO) {
+        ValidatorUtils.validateEntity(passwordDTO);
+        UserEntity user = userService.selectById(passwordDTO.getUserId());
+        if(user == null){
+            return new Response("0", "用户不存在");
+        }
+        String oldPassword = DigestUtils.sha256Hex(passwordDTO.getOldPassword());
+        if(!user.getPassword().equals(oldPassword)){
+            return new Response("0", "旧密码错误");
+        }
+        user.setPassword(DigestUtils.sha256Hex(passwordDTO.getNewPassword()));
+        return new Response("1", "密码修改成功");
+    }
 }
