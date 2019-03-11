@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.Cookie;
+
 /**
  * 用户表
  *
@@ -34,7 +36,7 @@ public class UserController {
      * 保存
      */
     @PostMapping("/register")
-    public Response save(@RequestBody RegisterDTO registerDTO) {
+    public Response save(RegisterDTO registerDTO) {
         //表单校验
         ValidatorUtils.validateEntity(registerDTO);
         EntityWrapper<UserEntity> wrapper = new EntityWrapper<>();
@@ -55,7 +57,7 @@ public class UserController {
      * 登录
      */
     @PostMapping("/login")
-    public Response update(@RequestBody LoginDTO loginDTO) {
+    public Response update(LoginDTO loginDTO) {
         ValidatorUtils.validateEntity(loginDTO);
         EntityWrapper<UserEntity> wrapper = new EntityWrapper<>();
         wrapper.eq("username", loginDTO.getUsername());
@@ -67,7 +69,9 @@ public class UserController {
         if(!user.getPassword().equals(password)){
             return new Response("0", "密码错误");
         }
-        return new Response("1", "登录成功");
+        Response response = new Response("1", "登录成功");
+        response.setData(new Cookie("userid",user.getId().toString()));
+        return response;
     }
 
 }

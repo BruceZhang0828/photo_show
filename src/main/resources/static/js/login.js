@@ -60,7 +60,7 @@ $(function(){
 		var len = $('#pwd').val().length;
 		if(len<8||len>20)
 		{
-			$('#pwd').next().html('密码最少8位，最长20位')
+			$('#pwd').next().html('密码最少8位，最长20位');
 			$('#pwd').next().show();
 			error_password = true;
 		}
@@ -120,21 +120,60 @@ $(function(){
     }
 
 
-	$('#reg_form').submit(function() {
+	/*$('#submit_button').submit(function() {
 		check_user_name();
 		check_pwd();
-		check_cpwd();
+		//check_cpwd();
 		// check_email();
-		check_mobile();
-		if(error_name == false && error_password == false && error_check_password == false && error_email == false && error_check == false)
+		//check_mobile();
+		if(error_name == false && error_password == false)
 		{
-			return true;
+			$(ajax(
+				{
+					url:"/user/login",
+					type:"post",
+					dataType:"json",
+					data:$('#reg_form').serialize(),
+					success:function (data) {
+						console.log(data);
+                    }
+				}
+			));
+			$("#reg_form")
 		}
 		else
 		{
 			return false;
 		}
 
-	});
+	});*/
+
+
+	function submit_form(){
+        check_user_name();
+        check_pwd();
+        //check_cpwd();
+        // check_email();
+        //check_mobile();
+        if(error_name == false && error_password == false)
+        {
+            $(ajax(
+                {
+                    url:"/user/login",
+                    type:"post",
+                    dataType:"json",
+                    data:$('#reg_form').serialize(),
+                    success:function (data) {
+                        console.log(data);
+                    }
+                }
+            ));
+            $("#reg_form")
+        }
+        else
+        {
+            return false;
+        }
+	}
 
 });
