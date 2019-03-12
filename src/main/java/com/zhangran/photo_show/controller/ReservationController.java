@@ -3,14 +3,17 @@ package com.zhangran.photo_show.controller;
 
 import com.zhangran.photo_show.entity.ReservationEntity;
 import com.zhangran.photo_show.service.ReservationService;
+import com.zhangran.photo_show.utils.PageUtils;
 import com.zhangran.photo_show.utils.Response;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.Map;
 
 
 /**
@@ -41,6 +44,14 @@ public class ReservationController {
         reservationService.insert(reservation);
 
         return new Response("1", "预约成功");
+    }
+
+    @RequestMapping("/list")
+    public Response list(@RequestParam Map<String, Object> params){
+        PageUtils  page = reservationService.queryPage(params);
+        Response response = new Response("1","查询成功");
+        response.setData(page);
+        return response;
     }
 
 }

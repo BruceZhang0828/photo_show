@@ -119,61 +119,31 @@ $(function(){
 		}
     }
 
-
-	/*$('#submit_button').submit(function() {
-		check_user_name();
-		check_pwd();
-		//check_cpwd();
-		// check_email();
-		//check_mobile();
-		if(error_name == false && error_password == false)
-		{
-			$(ajax(
-				{
-					url:"/user/login",
-					type:"post",
-					dataType:"json",
-					data:$('#reg_form').serialize(),
-					success:function (data) {
-						console.log(data);
-                    }
-				}
-			));
-			$("#reg_form")
-		}
-		else
-		{
-			return false;
-		}
-
-	});*/
-
-
-	function submit_form(){
+    $("#submit_button").click(function () {
         check_user_name();
         check_pwd();
-        //check_cpwd();
-        // check_email();
-        //check_mobile();
-        if(error_name == false && error_password == false)
-        {
-            $(ajax(
-                {
-                    url:"/user/login",
-                    type:"post",
-                    dataType:"json",
-                    data:$('#reg_form').serialize(),
-                    success:function (data) {
-                        console.log(data);
-                    }
+        if (error_name == false && error_password == false) {
+            $.ajax({
+                url: "/user/login",
+                type: "post",
+                dataType: "json",
+                data: $('#reg_form').serialize(),
+                success: function (data) {
+                    console.log(data.data);
+                    if(data.code=="1"){
+                    	alert(data.msg);
+                    	var localStorage = window.localStorage;
+                        var curTime = new Date().getTime();
+                    	localStorage.setItem("user",JSON.stringify({"userId":data.data.value,"time":curTime}));
+                    	window.location.href="index";
+					}else{
+                    	alert(data.msg);
+					}
                 }
-            ));
-            $("#reg_form")
-        }
-        else
-        {
+            });
+        } else {
             return false;
         }
-	}
 
+    });
 });
