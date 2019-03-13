@@ -23,4 +23,8 @@ public class IndexController  {
     public String register(){
         return "register";
     }
+    @RequestMapping(value = "/reservation")
+    public String reservation(){
+        return "reservation";
+    }
 }

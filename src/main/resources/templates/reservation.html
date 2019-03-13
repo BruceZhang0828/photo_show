@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的预约</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/jqgrid/ui.jqgrid-bootstrap.css">
+    <script src="../static/js/jquery-1.12.4.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/jqgrid/grid.locale-cn.js"></script>
+    <script src="../static/jqgrid/jquery.jqGrid.min.js"></script>
+</head>
+<body>
+<div class="jqGrid_wrapper">
+    <table id="jqGridList"></table>
+    <div id="jqGridPager"></div>
+</div>
+<script>
+    $(function(){
+        var jqGrid = $("#jqGridList");
+        jqGrid.jqGrid({
+            caption: "我的预约",
+            url: "/reservation/list",
+            mtype: "GET",
+            //styleUI: 'Bootstrap',//设置jqgrid的全局样式为bootstrap样式
+            datatype: "json",
+            colNames: ['用户名', '手机号', '预约日期','创建日期','状态'],
+            colModel: [
+                { name: 'username', index: 'username', width: 60, key: true, hidden: true },
+                { name: 'mobile', index: 'mobile', width: 60 },
+                { name: 'reservation_date', index: 'reservation_date', width: 60 },
+                { name: 'creat_date', index: 'creat_date', width: 60 },
+                { name: 'state', index: 'state', width: 60 }
+            ],
+            viewrecords: true,
+            height: 385,
+            rowNum: 10,
+            rowList : [10,30,50],
+            rownumbers: true,
+            rownumWidth: 25,
+            autowidth:true,
+            multiselect: true,
+            pager: "#jqGridPager",//分页控件的id
+            subGrid: false,//是否启用子表格
+            jsonReader : {
+                root: "data.list",
+                page: "data.currPage",
+                total: "data.totalPage",
+                records: "data.totalCount"
+            },
+            prmNames : {
+                page:"page",
+                rows:"limit",
+                order: "order"
+            },
+
+        });
+
+        // 设置jqgrid的宽度
+        $(window).bind('resize', function () {
+            var width = $('.jqGrid_wrapper').width();
+            jqGrid.setGridWidth(width);
+        });
+    });
+</script>
+</body>
+</html>

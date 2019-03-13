@@ -3,6 +3,9 @@ package com.zhangran.photo_show.service;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.zhangran.photo_show.entity.ReservationEntity;
+import com.zhangran.photo_show.utils.PageUtils;
+
+import java.util.Map;
 
 /**
  * 
@@ -13,5 +16,6 @@ import com.zhangran.photo_show.entity.ReservationEntity;
  */
 public interface ReservationService extends IService<ReservationEntity> {
 
+    PageUtils queryPage(Map<String, Object> params);
 }
 
