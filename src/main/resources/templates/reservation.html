@@ -1,67 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>我的预约</title>
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/jqgrid/ui.jqgrid-bootstrap.css">
-    <script src="../static/js/jquery-1.12.4.min.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
-    <script src="../static/jqgrid/grid.locale-cn.js"></script>
-    <script src="../static/jqgrid/jquery.jqGrid.min.js"></script>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
 <body>
-<div class="jqGrid_wrapper">
-    <table id="jqGridList"></table>
-    <div id="jqGridPager"></div>
-</div>
-<script>
-    $(function(){
-        var jqGrid = $("#jqGridList");
-        jqGrid.jqGrid({
-            caption: "我的预约",
-            url: "/reservation/list",
-            mtype: "GET",
-            //styleUI: 'Bootstrap',//设置jqgrid的全局样式为bootstrap样式
-            datatype: "json",
-            colNames: ['用户名', '手机号', '预约日期','创建日期','状态'],
-            colModel: [
-                { name: 'username', index: 'username', width: 60, key: true, hidden: true },
-                { name: 'mobile', index: 'mobile', width: 60 },
-                { name: 'reservation_date', index: 'reservation_date', width: 60 },
-                { name: 'creat_date', index: 'creat_date', width: 60 },
-                { name: 'state', index: 'state', width: 60 }
-            ],
-            viewrecords: true,
-            height: 385,
-            rowNum: 10,
-            rowList : [10,30,50],
-            rownumbers: true,
-            rownumWidth: 25,
-            autowidth:true,
-            multiselect: true,
-            pager: "#jqGridPager",//分页控件的id
-            subGrid: false,//是否启用子表格
-            jsonReader : {
-                root: "data.list",
-                page: "data.currPage",
-                total: "data.totalPage",
-                records: "data.totalCount"
-            },
-            prmNames : {
-                page:"page",
-                rows:"limit",
-                order: "order"
-            },
 
+<table class="layui-hide" id="test" lay-filter="test"></table>
+
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+    </div>
+</script>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+
+        table.render({
+            elem: '#test'
+            ,url:'/reservation/list'
+            ,toolbar: '#toolbarDemo'
+            ,title: '用户数据表'
+            /*,response:{
+                countName:'data.totalCount',
+                dataName:'data.list'
+            }*/
+            ,cols: [
+                [
+                {type: 'checkbox', fixed: 'left'},
+                {field:'data.id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
+                ,{field:'data.username', title:'用户名', width:120, edit: 'text'}
+                ,{field:'data.mobile', title:'手机号', width:120, edit: 'text'}
+                ,{field:'data.reservation_date', title:'预约日期', width:120, edit: 'text'}
+                ,{field:'data.creat_date', title:'创建日期', width:120, edit: 'text'}
+                ,{field:'data.state', title:'状态', width:120, edit: 'text'}
+                ]
+            ]
+            ,page: true
+            ,limit:10
+            ,limits:[5,10,20]
+            ,parseData: function(res){
+                return {
+                    "msg":res.msg,
+                    "count":res.data.totalCount,
+                    "data":res.data.list.reservationEntity
+                };
+            }
         });
 
-        // 设置jqgrid的宽度
-        $(window).bind('resize', function () {
-            var width = $('.jqGrid_wrapper').width();
-            jqGrid.setGridWidth(width);
+        //头工具栏事件
+        table.on('toolbar(test)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'getCheckData':
+                    var data = checkStatus.data;
+                    layer.alert(JSON.stringify(data));
+                    break;
+                case 'getCheckLength':
+                    var data = checkStatus.data;
+                    layer.msg('选中了：'+ data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.msg(checkStatus.isAll ? '全选': '未全选');
+                    break;
+            };
+        });
+
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if(obj.event === 'edit'){
+                layer.prompt({
+                    formType: 2
+                    ,value: data.email
+                }, function(value, index){
+                    obj.update({
+                        email: value
+                    });
+                    layer.close(index);
+                });
+            }
         });
     });
 </script>
+
 </body>
 </html>
