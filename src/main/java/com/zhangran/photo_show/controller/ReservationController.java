@@ -3,6 +3,7 @@ package com.zhangran.photo_show.controller;
 
 import com.zhangran.photo_show.entity.ReservationEntity;
 import com.zhangran.photo_show.service.ReservationService;
+import com.zhangran.photo_show.utils.PageResponse;
 import com.zhangran.photo_show.utils.PageUtils;
 import com.zhangran.photo_show.utils.Response;
 import org.apache.commons.lang.StringUtils;
@@ -47,10 +48,11 @@ public class ReservationController {
     }
 
     @RequestMapping("/list")
-    public Response list(@RequestParam Map<String, Object> params){
+    public PageResponse list(@RequestParam Map<String, Object> params){
         PageUtils  page = reservationService.queryPage(params);
-        Response response = new Response("1","查询成功");
-        response.setData(page);
+        PageResponse response = new PageResponse("0","查询成功");
+        response.setData(page.getList());
+        response.setTotalCount(page.getTotalCount());
         return response;
     }
 

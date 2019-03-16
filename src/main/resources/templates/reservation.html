@@ -15,16 +15,19 @@
 
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
-        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
-        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+
+        <button class="layui-btn layui-btn-radius layui-btn-sm" lay-event="add">添加预约</button>
+        <button class="layui-btn layui-btn-radius layui-btn-danger layui-btn-sm" lay-event="getCheckData">取消预约</button>
+        <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>-->
+        <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>-->
     </div>
 </script>
 
-<script type="text/html" id="barDemo">
+<!--<script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-</script>
+</script>-->
 
 
 <script src="../static/layui/layui.js" charset="utf-8"></script>
@@ -33,7 +36,7 @@
 <script>
     layui.use('table', function(){
         var table = layui.table;
-
+        var util = layui.util;
         table.render({
             elem: '#test'
             ,url:'/reservation/list'
@@ -44,42 +47,87 @@
                 dataName:'data.list'
             }*/
             ,cols: [
-                [
-                {type: 'checkbox', fixed: 'left'},
-                {field:'data.id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
-                ,{field:'data.username', title:'用户名', width:120, edit: 'text'}
-                ,{field:'data.mobile', title:'手机号', width:120, edit: 'text'}
-                ,{field:'data.reservation_date', title:'预约日期', width:120, edit: 'text'}
-                ,{field:'data.creat_date', title:'创建日期', width:120, edit: 'text'}
-                ,{field:'data.state', title:'状态', width:120, edit: 'text'}
+                [{type: 'checkbox', fixed: 'left'},
+                {field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
+                ,{field:'username', title:'用户名', width:120}
+                ,{field:'mobile', title:'手机号', width:120}
+                ,{field:'reservationDate', title:'预约日期', width:180,templet:function(d){
+                    if(d.reservationDate){
+                        return util.toDateString(d.reservationDate, "yyyy-MM-dd HH:mm:ss");
+                        }else{
+                        return util.toDateString(d.commPosttime*1000, "yyyy-MM-dd HH:mm:ss");
+                        }
+                    }
+                }
+                ,{field:'creatDate', title:'创建日期', width:180,templet:function(d){
+                    if(d.creatDate){
+                        return util.toDateString(d.creatDate, "yyyy-MM-dd HH:mm:ss");
+                        }else{
+                        return util.toDateString(d.creatDate*1000, "yyyy-MM-dd HH:mm:ss");
+                        }
+                    }
+                }
+                ,{field:'state', title:'状态', width:120,templet:function (d) {
+                     if(d.state){
+                         switch(d.state){
+                             case 0:
+                                 return "未处理";
+                                 break;
+                             case 1:
+                                 return "已经处理";
+                                 break;
+                             case 2:
+                                 return "取消预约";
+                                 break;
+                         }
+
+                     }else{
+                         return "未处理";
+                     }
+                    }}
                 ]
             ]
             ,page: true
             ,limit:10
             ,limits:[5,10,20]
-            ,parseData: function(res){
+            /*,parseData: function(res){
                 return {
+                    "code":res.code,
                     "msg":res.msg,
                     "count":res.data.totalCount,
-                    "data":res.data.list.reservationEntity
+                    "data":res.data.list
                 };
-            }
+            }*/
         });
 
         //头工具栏事件
         table.on('toolbar(test)', function(obj){
             var checkStatus = table.checkStatus(obj.config.id);
             switch(obj.event){
-                case 'getCheckData':
+                case 'getCheckData': //取消预约
                     var data = checkStatus.data;
-                    layer.alert(JSON.stringify(data));
+                    console.log(JSON.stringify(data[0]).id);
+                    layer.msg('您确定要取消该预约?', {
+                        time: 20000, //20s后自动关闭
+                        btn: ['确定', '否'],
+                        yes:function(){
+                            layer.alert(data[0].id);
+                        },
+                        btn2:function(){
+                            layer.close();
+                        }
+                    });
+                    // layer.alert(JSON.stringify(data));
                     break;
-                case 'getCheckLength':
+               /* case 'getCheckLength':
                     var data = checkStatus.data;
                     layer.msg('选中了：'+ data.length + ' 个');
                     break;
                 case 'isAll':
                     layer.msg(checkStatus.isAll ? '全选': '未全选');
+                    break;*/
+                case 'add'://添加预约
+
                     break;
             };
         });
