@@ -30,9 +30,7 @@ public class ReservationController {
      * 保存
      */
 
-    @RequestMapping(value = "/save",method = RequestMethod.POST, produces = {"application/json", "application/xml"}
-            ,  consumes = {"application/x-www-form-urlencoded"})
-    @ResponseBody
+    @PostMapping(value = "/save")
     public Response save(ReservationEntity reservation) {
 
         if(reservation.getUserId() == null){

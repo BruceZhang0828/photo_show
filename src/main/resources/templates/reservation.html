@@ -34,6 +34,16 @@
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 
 <script>
+    var user = window.localStorage.user;
+    var userId;
+    if(user){
+        if(new Date().getTime()-user.time>10*60*60*1000){
+            console.log("登录过期");
+            window.localStorage.removeItem("user");
+        }else{
+            userId = user.id;
+        }
+    }
     layui.use('table', function(){
         var table = layui.table;
         var util = layui.util;
@@ -42,10 +52,6 @@
             ,url:'/reservation/list'
             ,toolbar: '#toolbarDemo'
             ,title: '用户数据表'
-            /*,response:{
-                countName:'data.totalCount',
-                dataName:'data.list'
-            }*/
             ,cols: [
                 [{type: 'checkbox', fixed: 'left'},
                 {field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
@@ -90,14 +96,6 @@
             ,page: true
             ,limit:10
             ,limits:[5,10,20]
-            /*,parseData: function(res){
-                return {
-                    "code":res.code,
-                    "msg":res.msg,
-                    "count":res.data.totalCount,
-                    "data":res.data.list
-                };
-            }*/
         });
 
         //头工具栏事件
@@ -119,19 +117,12 @@
                     });
                     // layer.alert(JSON.stringify(data));
                     break;
-               /* case 'getCheckLength':
-                    var data = checkStatus.data;
-                    layer.msg('选中了：'+ data.length + ' 个');
-                    break;
-                case 'isAll':
-                    layer.msg(checkStatus.isAll ? '全选': '未全选');
-                    break;*/
                 case 'add'://添加预约
                     layer.open({
                         title:'添加预约',
                         type:2,
                         content:'/reservationAdd',
-                        area:['700px','500px'],
+                        area:['700px','500px']
                     });
                     break;
             };
