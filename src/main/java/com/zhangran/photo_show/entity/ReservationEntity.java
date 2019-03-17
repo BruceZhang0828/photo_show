@@ -2,6 +2,7 @@ package com.zhangran.photo_show.entity;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -43,9 +44,23 @@ public class ReservationEntity implements Serializable {
 	 * 管理员id
 	 */
 	private Long sUserId;
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public Long getsUserId() {
+		return sUserId;
+	}
+
+	public void setsUserId(Long sUserId) {
+		this.sUserId = sUserId;
+	}
+
 	/**
 	 * 预约日期
 	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date reservationDate;
 	/**
 	 * 创建日期
@@ -59,6 +74,16 @@ public class ReservationEntity implements Serializable {
 	 * 定金
 	 */
 	private BigDecimal earnestMoney;
+
+	private Long categoryId;
+
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
 
 	/**
 	 * 设置：

@@ -15,6 +15,7 @@
         <result property="creatDate" column="creat_date"/>
         <result property="state" column="state"/>
         <result property="earnestMoney" column="earnest_money"/>
+        <result property="categoryId" column="category_id"/>
     </resultMap>
 
 

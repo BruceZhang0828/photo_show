@@ -8,10 +8,7 @@ import com.zhangran.photo_show.utils.PageUtils;
 import com.zhangran.photo_show.utils.Response;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.Map;
@@ -32,8 +29,11 @@ public class ReservationController {
     /**
      * 保存
      */
-    @RequestMapping("/save")
-    public Response save(@RequestBody ReservationEntity reservation) {
+
+    @RequestMapping(value = "/save",method = RequestMethod.POST, produces = {"application/json", "application/xml"}
+            ,  consumes = {"application/x-www-form-urlencoded"})
+    @ResponseBody
+    public Response save(ReservationEntity reservation) {
 
         if(reservation.getUserId() == null){
             return new Response("0", "用户不能为空");

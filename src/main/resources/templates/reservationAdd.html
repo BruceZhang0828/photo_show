@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>我的预约</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
+</head>
+<body>
+<form class="layui-form layui-form-pane" action="/reservation/save" method="post">
+    <div class="layui-form-item">
+        <label class="layui-form-label">手机号</label>
+        <div class="layui-input-inline">
+            <input type="text" name="mobile" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">预约日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="reservationDate" id="date1" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">预约分类</label>
+        <div class="layui-input-inline">
+            <select name="categoryId" lay-filter="aihao" autocomplete="off">
+                <option autocomplete="off" value=""></option>
+                <option autocomplete="off" value="0">写作</option>
+                <option autocomplete="off" value="1" selected="">阅读</option>
+                <option autocomplete="off" value="2">游戏</option>
+                <option autocomplete="off" value="3">音乐</option>
+                <option autocomplete="off" value="4">旅行</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">备注信息</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <button class="layui-btn" lay-submit="" lay-filter="demo2">提交</button>
+    </div>
+</form>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../static/js/jquery-1.12.4.min.js"></script>
+<script>
+    layui.use(['form','laydate'],function(){
+        var form = layui.form,
+            layer = layui.layer,
+            laydate = layui.laydate;
+        laydate.render({
+            elem:'#date1',
+            type:'datetime'
+        });
+        form.on('submit(demo2)',function(data){
+            $.ajax({
+                url:"reservation/save",
+                data:JSON.stringify(data.field),
+                type:'post',
+                success:function(data){
+                    if(data.code=='1'){
+                        layer.msg(res.info,{time:2000,icon:1},function(){
+                            parent.refresh();
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index); //再执行关闭
+                        });
+                    }else{
+                        layer.msg(res.info,{time:2000});
+                    }
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
