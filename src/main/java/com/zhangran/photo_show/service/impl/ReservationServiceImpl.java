@@ -9,7 +9,7 @@ import com.zhangran.photo_show.entity.ReservationEntity;
 import com.zhangran.photo_show.service.ReservationService;
 import com.zhangran.photo_show.utils.PageUtils;
 import com.zhangran.photo_show.utils.Query;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -20,9 +20,11 @@ public class ReservationServiceImpl extends ServiceImpl<ReservationDao, Reservat
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
+        String userId = (String) params.get("userId");
         Page<ReservationEntity> page = this.selectPage(
                 new Query<ReservationEntity>(params).getPage(),
                 new EntityWrapper<ReservationEntity>()
+                .eq(StringUtils.isNotBlank(userId), "user_id", userId)
         );
 
         return new PageUtils(page);
