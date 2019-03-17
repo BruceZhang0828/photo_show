@@ -70,7 +70,8 @@ public class UserController {
             return new Response("0", "密码错误");
         }
         Response response = new Response("1", "登录成功");
-        response.setData(new Cookie("userid",user.getId().toString()));
+        response.setData(user);
+        //response.setData(new Cookie("userid",user.getId().toString()));
         return response;
     }
 
