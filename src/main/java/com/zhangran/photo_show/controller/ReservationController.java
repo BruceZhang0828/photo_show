@@ -36,7 +36,7 @@ public class ReservationController {
         if(reservation.getUserId() == null){
             return new Response("0", "用户不能为空");
         }
-        if(StringUtils.isNotBlank(reservation.getMobile())){
+        if(StringUtils.isBlank(reservation.getMobile())){
             return new Response("0", "手机号不能为空");
         }
         reservation.setCreatDate(new Date());
@@ -50,7 +50,7 @@ public class ReservationController {
         PageUtils  page = reservationService.queryPage(params);
         PageResponse response = new PageResponse("0","查询成功");
         response.setData(page.getList());
-        response.setTotalCount(page.getTotalCount());
+        response.setCount(page.getTotalCount());
         return response;
     }
 

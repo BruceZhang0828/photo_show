@@ -17,8 +17,6 @@ import java.util.Map;
 @Service("reservationService")
 public class ReservationServiceImpl extends ServiceImpl<ReservationDao, ReservationEntity> implements ReservationService {
 
-    @Autowired
-    private ReservationDao reservationDao;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {

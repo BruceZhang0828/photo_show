@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
 </head>
 <body>
-<form class="layui-form layui-form-pane" action="/reservation/save" method="post">
+<form id="form" class="layui-form layui-form-pane"  method="post">
     <input hidden="hidden" id="userId" name="userId" value="">
     <div class="layui-form-item">
         <label class="layui-form-label">手机号</label>
         <div class="layui-input-inline">
-            <input type="text" name="mobile" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+            <input type="text" name="mobile" placeholder="请输入" autocomplete="off" class="layui-input">
         </div>
     </div>
 
@@ -49,8 +49,8 @@
         <button class="layui-btn" lay-submit="" lay-filter="demo2">提交</button>
     </div>
 </form>
-<script src="../static/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="../static/js/jquery-1.12.4.min.js"></script>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
 
 <script>
 
@@ -77,13 +77,13 @@
         form.on('submit(demo2)',function(data){
             $.ajax({
                 url:"reservation/save",
-                dataType:'json',
-                data:JSON.stringify(data.field),
+                data:$("#form").serialize(),
                 type:'post',
+                dataType:'json',
                 success:function(data){
                     if(data.code=='1'){
                         layer.msg(data.msg,{time:2000,icon:1},function(){
-                            parent.refresh();
+                            //parent.refresh();
                             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                             parent.layer.close(index); //再执行关闭
                         });
@@ -92,6 +92,7 @@
                     }
                 }
             });
+            return false;
         });
     });
 </script>

@@ -6,13 +6,13 @@ public class PageResponse extends Response {
         super(code, msg);
     }
 
-    private int totalCount;
+    private int count;
 
-    public int getTotalCount() {
-        return totalCount;
+    public int getCount() {
+        return count;
     }
 
-    public void setTotalCount(int totalCount) {
-        this.totalCount = totalCount;
+    public void setCount(int count) {
+        this.count = count;
     }
 }

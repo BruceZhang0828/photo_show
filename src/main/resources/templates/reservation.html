@@ -29,7 +29,7 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>-->
 
-
+<script type="text/javascript" src="../static/js/jquery-1.12.4.min.js"></script>
 <script src="../static/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 
@@ -41,7 +41,8 @@
             console.log("登录过期");
             window.localStorage.removeItem("user");
         }else{
-            userId = user.id;
+            userId = JSON.parse(user).userId;
+            $("#userId").val(userId);
         }
     }
     layui.use('table', function(){
@@ -52,6 +53,7 @@
             ,url:'/reservation/list'
             ,toolbar: '#toolbarDemo'
             ,title: '用户数据表'
+            ,where:{'userId':userId}
             ,cols: [
                 [{type: 'checkbox', fixed: 'left'},
                 {field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
