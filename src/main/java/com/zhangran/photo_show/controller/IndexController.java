@@ -2,10 +2,8 @@ package com.zhangran.photo_show.controller;
 
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 public class IndexController  {
@@ -30,5 +28,10 @@ public class IndexController  {
     @RequestMapping(value = "/reservationAdd")
     public String reservationAdd(){
         return "reservationAdd";
+    }
+    @RequestMapping(value = "/works")
+    public String works(){
+
+        return "category";
     }
 }
