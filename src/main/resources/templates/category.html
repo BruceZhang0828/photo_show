@@ -18,7 +18,10 @@
         <li th:class="${cateStat.index} eq 0?'layui-this'" th:each="category,cateStat : ${categories}" th:text="${category.name}" ></li>
     </ul>
     <div class="layui-tab-content" style="height: 100px;">
-        <div class="layui-tab-item layui-show">默认宽度是相对于父元素100%适应的，你也可以固定宽度。</div>
+
+        <div class="layui-tab-item layui-show">
+            <ul class="flow-default" id="LAY_demo1"></ul>
+        </div>
         <div class="layui-tab-item">2</div>
         <div class="layui-tab-item">3</div>
         <div class="layui-tab-item">4</div>
@@ -46,17 +49,24 @@
             elem: '#LAY_demo1' //流加载容器
             ,scrollElem: '#LAY_demo1' //滚动条所在元素，一般不用填，此处只是演示需要。
             ,done: function(page, next){ //执行下一页的回调
-
                 //模拟数据插入
                 setTimeout(function(){
-                    var lis = [];
-                    for(var i = 0; i < 8; i++){
-                        lis.push('<li>'+ ( (page-1)*8 + i + 1 ) +'</li>')
-                    }
-
-                    //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
-                    //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
-                    next(lis.join(''), page < 10); //假设总页数为 10
+                    $.ajax({
+                        url:'/categoryimage/list',
+                        type:'get',
+                        data:{'categoryId':1,'page':page},
+                        dataType:'json',
+                        success:function (data) {
+                            console.log(data);
+                            var lis = [];
+                            for(var i = 0; i < data.list.length; i++){
+                                lis.push('<img style="width: 256px;height: 256px" src='+data.list[i].url+'>')
+                            }
+                            //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
+                            //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
+                            next(lis.join(''), page < 10); //假设总页数为 10
+                        }
+                    });
                 }, 500);
             }
         });

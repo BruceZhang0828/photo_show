@@ -3,6 +3,7 @@
 package com.zhangran.photo_show.utils;
 
 import com.baomidou.mybatisplus.plugins.Page;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  * @author zhangran
  * @email zhangran@gmail.com
  */
+@Data
 public class PageUtils implements Serializable {
 	private static final long serialVersionUID = 1L;
 	//总记录数
