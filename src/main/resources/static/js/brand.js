@@ -1,0 +1,1 @@
+$(function(){$(".header-navgation .brand").addClass("active");new Swiper(".swiper-container",{pagination:".swiper-pagination",nextButton:".swiper-button-next",prevButton:".swiper-button-prev",slidesPerView:1,paginationClickable:!0,spaceBetween:30,loop:!0,centeredSlides:!0,autoplay:2500,autoplayDisableOnInteraction:!1})});

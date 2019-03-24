@@ -7,68 +7,103 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../static/css/category.css">
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
 <body>
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-    <legend>卡片风格的Tab</legend>
+    <legend>分类展示</legend>
 </fieldset>
-<div class="layui-tab layui-tab-card" lay-filter="tab">
-    <ul class="layui-tab-title">
-        <li th:class="${cateStat.index} eq 0?'layui-this'" th:each="category,cateStat : ${categories}" th:text="${category.name}" ></li>
-    </ul>
-    <div class="layui-tab-content" style="height: 100px;">
+<div>
 
-        <div class="layui-tab-item layui-show">
-            <ul class="flow-default" id="LAY_demo1"></ul>
+</div>
+<div id="layId" class="layui-tab layui-tab-card" lay-filter="tab" style="position: relative;width: 1200px;height: 1556px">
+    <ul class="layui-tab-title">
+        <li th:class="${cateStat.index} eq 0?'layui-this'" th:each="category,cateStat : ${categories}" th:id="${category.id}" th:text="${category.name}" ></li>
+    </ul>
+
+    <div class="layui-tab-content" style="position: relative; width: 1000px; height: 588px;">
+        <div th:each="category,cateStat : ${categories}" class="layui-tab-item layui-show">
+            <ul class="flow-default layui-anim" data-anim="layui-anim-rotate" style="display: block" th:id="lay_+${cateStat.index}"></ul>
         </div>
-        <div class="layui-tab-item">2</div>
-        <div class="layui-tab-item">3</div>
-        <div class="layui-tab-item">4</div>
-        <div class="layui-tab-item">5</div>
-        <div class="layui-tab-item">6</div>
     </div>
 </div>
-<!--<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>信息流 - 滚动加载</legend>
-</fieldset>
-
-<ul class="flow-default" id="LAY_demo1"></ul>-->
 <script type="text/javascript" src="../static/js/jquery-1.12.4.min.js"></script>
 <script src="../static/layui/layui.js" charset="utf-8"></script>
 <script>
-    layui.use('element',function(){
-        var element = layui.element;
-        element.on('tab',function(data){
-            console.log(data);
-        });
-    });
-    layui.use('flow',function(){
-        var flow = layui.flow;
-        flow.load({
-            elem: '#LAY_demo1' //流加载容器
-            ,scrollElem: '#LAY_demo1' //滚动条所在元素，一般不用填，此处只是演示需要。
-            ,done: function(page, next){ //执行下一页的回调
-                //模拟数据插入
-                setTimeout(function(){
-                    $.ajax({
-                        url:'/categoryimage/list',
-                        type:'get',
-                        data:{'categoryId':1,'page':page},
-                        dataType:'json',
-                        success:function (data) {
-                            console.log(data);
-                            var lis = [];
-                            for(var i = 0; i < data.list.length; i++){
-                                lis.push('<img style="width: 256px;height: 256px" src='+data.list[i].url+'>')
+    $(function(){
+        layui.use('flow',function(){
+            var flow = layui.flow;
+            flow.load({
+                elem: '#lay_'+0 //流加载容器
+                //,scrollElem: '#lay_'+0//滚动条所在元素，一般不用填，此处只是演示需要。
+                ,isAuto: true
+                ,done: function(page, next){ //执行下一页的回调
+                    //模拟数据插入
+                    setTimeout(function(){
+                        $.ajax({
+                            url:'/categoryimage/list',
+                            type:'get',
+                            data:{'categoryId':1,'page':page},
+                            dataType:'json',
+                            success:function (data) {
+                                console.log(data);
+                                var lis = [];
+                                for(var i = 0; i < data.list.length; i++){
+                                    var imgUrl = '<img  style=width: 160px;height: 240px" src='+data.list[i].url+'>';
+                                    var indexOfImg = i%5*200;
+                                    var topOfImg = Math.floor(i/5)*(296);
+                                    var str = "<div class='flowPic' style='position:absolute;left:"+indexOfImg+"px ;top: "+topOfImg+"px;'>"+imgUrl+"</div>";
+                                    lis.push(str);
+                                }
+                                //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
+                                //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
+                                next(lis.join(''), page < data.totalPage); //假设总页数为 10
                             }
-                            //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
-                            //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
-                            next(lis.join(''), page < 10); //假设总页数为 10
+                        });
+                    }, 500);
+                }
+            });
+        });
+        layui.use('element',function(){
+            var element = layui.element;
+            element.on('tab',function(data){
+                console.log(data);
+                var cateIndex = data.index;
+                var cateId = $("#layId").find("li")[cateIndex].getAttribute("id");
+                layui.use('flow',function(){
+                    var flow = layui.flow;
+                    flow.load({
+                        elem: '#lay_'+cateIndex //流加载容器
+                        //,scrollElem: '#lay_'+cateIndex//滚动条所在元素，一般不用填，此处只是演示需要。
+                        ,done: function(page, next){ //执行下一页的回调
+                            //模拟数据插入
+                            setTimeout(function(){
+                                $.ajax({
+                                    url:'/categoryimage/list',
+                                    type:'get',
+                                    data:{'categoryId':cateId,'page':page},
+                                    dataType:'json',
+                                    success:function (data) {
+                                        console.log(data);
+                                        var lis = [];
+                                        for(var i = 0; i < data.list.length; i++){
+                                            var imgUrl = '<img  style=width: 160px;height: 240px" src='+data.list[i].url+'>';
+                                            var indexOfImg = i%5*200;
+                                            var topOfImg = Math.floor(i/5)*(296);
+                                            var str = "<div class='flowPic' style='position:absolute;left:"+indexOfImg+"px ;top: "+topOfImg+"px;'>"+imgUrl+"</div>";
+                                            lis.push(str);
+                                        }
+                                        //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
+                                        //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
+                                        next(lis.join(''), page < data.totalPage); //假设总页数为 10
+                                    }
+                                });
+                            }, 500);
                         }
                     });
-                }, 500);
-            }
+                });
+            });
         });
     });
 </script>

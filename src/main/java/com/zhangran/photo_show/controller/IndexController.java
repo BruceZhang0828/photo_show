@@ -31,7 +31,18 @@ public class IndexController  {
     }
     @RequestMapping(value = "/works")
     public String works(){
-
         return "category";
+    }
+    @RequestMapping(value = "/activity")
+    public String activity(){
+        return "activity";
+    }
+    @RequestMapping(value = "/affiliate")
+    public String affiliate(){
+        return "affiliate";
+    }
+    @RequestMapping(value = "/brand")
+    public String brand(){
+        return "brand";
     }
 }
