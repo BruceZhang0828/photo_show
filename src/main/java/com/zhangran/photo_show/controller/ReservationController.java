@@ -54,4 +54,12 @@ public class ReservationController {
         return response;
     }
 
+    @RequestMapping("/update")
+    public Response update(@RequestParam String id){
+        boolean b = reservationService.updateStateById(id);
+        Response response = new Response();
+        response.setData(b);
+        return response;
+    }
+
 }

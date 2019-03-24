@@ -7,7 +7,7 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <!-- styles -->
-<link rel="stylesheet" href="static/assets/css/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" href="../static/assets/css/fancybox/jquery.fancybox.css">
 <link href="../static/assets/css/bootstrap.css" rel="stylesheet" />
 <link href="../static/assets/css/bootstrap-theme.css" rel="stylesheet" />
 <link rel="stylesheet" href="../static/assets/css/slippry.css">
@@ -21,7 +21,6 @@
 </head>
 <body>
 <header>
-
 <div id="navigation" class="navbar navbar-inverse navbar-fixed-top default" role="navigation">
   <div class="container">
 
@@ -42,8 +41,8 @@
 					<li class="current"><a href="index.html">首页</a></li>
 					<li><a href="brand">品牌</a></li>
 					<li><a href="activity">店铺</a></li>
-					<li><a href="/category/list">作品</a></li>
-					<li><a href="works">作品2</a></li>
+					<!--<li><a href="/category/list">作品</a></li>-->
+					<li><a href="works">作品</a></li>
 					<li><a id="yuyue" href="affiliate">合伙人</a></li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">设置
@@ -57,6 +56,7 @@
 							</li>
 							<li class="inUser">
 								<a href="javascript:void(0)" onclick="getReservation()">我的预约</a>
+								<a href="javascript:void(0)" onclick="getMyPics()">我的照片</a>
 							</li>
 						</ul>
 					</li>
@@ -71,7 +71,6 @@
 	  </div>
   </div>
 </div>
-
 </header>
 <!-- section intro -->
 <section id="intro">
@@ -379,6 +378,13 @@
 	function getReservation() {
 	    if(userId){
             window.location.href="/reservation";
+        }else{
+	        console.log("登录过期");
+		}
+    }
+    function getMyPics() {
+	    if(userId){
+            window.location.href="/myPics";
         }else{
 	        console.log("登录过期");
 		}

@@ -19,10 +19,10 @@ public class CategoryImageServiceImpl extends ServiceImpl<CategoryImageDao, Cate
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        String categoryId = (String) params.get("categoryId");
+        String categoryId = (String) params.get("category_id");
         Page<CategoryImageEntity> page = this.selectPage(
                 new Query<CategoryImageEntity>(params).getPage(),
-                new EntityWrapper<CategoryImageEntity>().eq(StringUtils.isNotBlank(categoryId),"category_id",categoryId)
+                new EntityWrapper<CategoryImageEntity>().eq(StringUtils.isNotBlank(categoryId)&&!("0".equals(categoryId)),"category_id",categoryId)
         );
 
         return new PageUtils(page);

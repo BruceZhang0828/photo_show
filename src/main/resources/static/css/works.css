@@ -1,1 +1,410 @@
-body{position:relative}body .warp{z-index:998;width:100%;margin:0 auto}body .warp .container{width:100%;position:relative;display:inline-block}body .warp .container .dummy{margin-top:40%}body .warp .container .bannerPic{position:absolute;left:0;right:0;top:0;bottom:0;background-image:url(../img/works-banner2.jpg);background-repeat:no-repeat;background-size:cover}body .warp .navModel{margin:30px auto 24px;width:1000px;height:60px;position:relative;white-space:nowrap}body .warp .navModel ul{width:94%;height:28px;line-height:28px;margin:0 auto}body .warp .navModel ul li{display:inline-block;margin-right:53px;font-size:14px}body .warp .navModel ul li a{padding:3px 8px;height:30px;line-height:30px;color:#333;display:block;text-decoration:none;text-align:center}body .warp .navModel ul li a:hover{color:#ccc}body .warp .navModel ul li:eq(8){margin-right:0}body .warp .navModel ul .fontBigger{font-size:16px;font-weight:900}body .warp .navModel .nav-ClassStyle{width:100%;height:1px;text-align:center;background-color:#eee;margin:20px auto}body .warp .navModel .nav-ClassStyle a{display:inline-block;padding:3px 0;height:16px;line-height:16px;color:#333;font-size:12px;text-decoration:none;position:absolute;top:33px;background-color:#fff;border:1px solid #eee;border-bottom:none;text-align:center}body .warp .worksShow{width:1000px;min-height:500px;margin:0 auto 100px;padding-bottom:80px;position:relative}body .warp .worksShow #masonry{padding-left:0;padding-right:0;left:12px}body .warp .worksShow #masonry .flowPic{margin:8px;text-align:center;float:left;box-shadow:0 0 3px #d5d2d2;width:160px;min-height:180px}body .warp .worksShow #masonry .flowPic img{z-index:888;width:100%;margin:0 auto}body .warp .worksShow #masonry .flowPic .wenzi-wrap{position:relative;bottom:0;width:100%;marigin:0 auto;padding-top:1px;height:70px;z-index:988;background-color:#fff}body .warp .worksShow #masonry .flowPic .wenzi-wrap .wenzi{width:85%;text-align:left;margin:0 auto}body .warp .worksShow #masonry .flowPic .wenzi-wrap .wenzi .like{display:inline;float:right}body .warp .worksShow #masonry .flowPic .wenzi-wrap .wenzi .like a{display:inline-block;width:10px;height:10px;margin-top:3px;margin-right:5px;background-image:url(../img/icon-love.png);background-repeat:no-repeat}body .warp .worksShow #masonry .flowPic .wenzi-wrap .wenzi .like .changeHeart{background-image:url(../img/shixin-love.png)}body .warp .worksShow #masonry .flowPic .wenzi-wrap .wenzi .like em{font-size:10px;color:#a4a4a4;font-style:normal}body .warp .worksShow #masonry .flowPic .wenzi-wrap .wenzi h5{font-size:12px;font-weight:500;color:#424141;line-height:18px}body .warp .worksShow #masonry .flowPic .wenzi-wrap .wenzi span{display:inline-block;width:66px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:10px;color:#a4a4a4}body .warp .worksShow #masonry .flowPic:nth-child(5n){margin-right:0}body .warp .worksShow #masonry .flowPic:hover{box-shadow:0 0 15px #8f8b8b}body .warp .worksShow .loadedWrap{width:200px;height:30px;margin:30px auto}body .warp .worksShow .loadedWrap .loaded{width:200px;margin:0 auto;color:#a4a4a4;font-size:16px;display:none}body .warp .worksShow .loadingTip{width:63px;position:relative;text-align:center;margin:0 auto}body .imageModel .imageBlock .imageWrap .loadingTip:before,body .warp .worksShow .loadingTip:before{width:10px;height:10px;border-radius:10px;background:#00f;content:'';position:absolute;background-color:#9b59b6;animation:loadingTip_before 1.5s infinite ease-in-out}body .imageModel .imageBlock .imageWrap .loadingTip:after,body .warp .worksShow .loadingTip:after{width:10px;height:10px;border-radius:10px;background:#00f;content:'';position:absolute;background-color:#2ecc71;left:22px;animation:loadingTip_after 1.5s infinite ease-in-out}@keyframes loadingTip_before{0%,to{transform:translateX(0) rotate(0deg)}50%{transform:translateX(50px) scale(1.2) rotate(260deg);background:#2ecc71;border-radius:0}}@keyframes loadingTip_after{0%,to{transform:translateX(0)}50%{transform:translateX(-50px) scale(1.2) rotate(-260deg);background:#9b59b6;border-radius:0}}body .backTop{position:fixed;right:6%;bottom:230px;display:none}body .backTop .glyphicon.glyphicon-arrow-up.to-top{display:inline-block;width:33px;height:33px;padding:9px;color:#000;text-decoration:none;border:1px solid #afaeae}body .backTop .glyphicon.glyphicon-arrow-up.to-top:hover{color:#33a6a9;border-color:#33a6a9}body .imageModel{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1001}body .imageModel .globalMask{position:absolute;top:0;right:0;bottom:0;left:0;opacity:.8;background-color:#333}body .imageModel .imageBlock{min-height:200px;position:absolute;top:45%;left:50%;margin-top:-15%;margin-left:-15%;opacity:0;text-align:center}body .imageModel .imageBlock .imageWrap{min-width:300px;min-height:200px;background-color:#fff}body .imageModel .imageBlock .imageWrap img{vertical-align:middle}body .imageModel .imageBlock .imageWrap .loadingTip{width:63px;position:absolute;text-align:center;top:42%;left:40%}@keyframes loadingTip_before{0%,to{transform:translateX(0) rotate(0deg)}50%{transform:translateX(50px) scale(1.2) rotate(260deg);background:#2ecc71;border-radius:0}}@keyframes loadingTip_after{0%,to{transform:translateX(0)}50%{transform:translateX(-50px) scale(1.2) rotate(-260deg);background:#9b59b6;border-radius:0}}body .imageModel .imageBlock .tipModel{background-color:#333;position:relative;bottom:12px;left:0;opacity:.8;width:100%;height:50px}body .imageModel .imageBlock .tipModel p{text-align:center;margin-top:-38px;padding-top:12px;color:#fff}body .imageModel .imageBlock .nextArrow,body .imageModel .imageBlock .prevArrow{display:block;width:30px;height:30px;position:absolute;top:40%;background-repeat:no-repeat;background-position:center;background-size:60%}body .imageModel .imageBlock .prevArrow{left:5%;background-image:url(../img/preArrow.png)}body .imageModel .imageBlock .nextArrow{right:5%;background-image:url(../img/nextArrow.png)}body .imageModel .imageBlock .closeModel{display:block;width:30px;height:30px;margin:0 auto;background-image:url(../img/closeBtn.png);background-repeat:no-repeat;background-position:center;background-size:80%}body .imageModel .imageBlock .tipAlert{z-index:2;color:#fff;font-size:18px;position:absolute;top:40%;left:33%}
+body {
+    position: relative
+}
+
+body .warp {
+    z-index: 998;
+    width: 100%;
+    margin: 0 auto
+}
+
+body .warp .container {
+    width: 100%;
+    position: relative;
+    display: inline-block
+}
+
+body .warp .container .dummy {
+    margin-top: 40%
+}
+
+body .warp .container .bannerPic {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-image: url(../img/works-banner2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover
+}
+
+body .warp .navModel {
+    margin: 30px auto 24px;
+    width: 1000px;
+    height: 60px;
+    position: relative;
+    white-space: nowrap
+}
+
+body .warp .navModel ul {
+    width: 94%;
+    height: 28px;
+    line-height: 28px;
+    margin: 0 auto
+}
+
+body .warp .navModel ul li {
+    display: inline-block;
+    margin-right: 53px;
+    font-size: 14px
+}
+
+body .warp .navModel ul li a {
+    padding: 3px 8px;
+    height: 30px;
+    line-height: 30px;
+    color: #333;
+    display: block;
+    text-decoration: none;
+    text-align: center
+}
+
+body .warp .navModel ul li a:hover {
+    color: #ccc
+}
+
+body .warp .navModel ul li:eq(8) {
+    margin-right: 0
+}
+
+body .warp .navModel ul .fontBigger {
+    font-size: 16px;
+    font-weight: 900
+}
+
+body .warp .navModel .nav-ClassStyle {
+    width: 100%;
+    height: 1px;
+    text-align: center;
+    background-color: #eee;
+    margin: 20px auto
+}
+
+body .warp .navModel .nav-ClassStyle a {
+    display: inline-block;
+    padding: 3px 0;
+    height: 16px;
+    line-height: 16px;
+    color: #333;
+    font-size: 12px;
+    text-decoration: none;
+    position: absolute;
+    top: 33px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-bottom: none;
+    text-align: center
+}
+
+body .warp .worksShow {
+    width: 1000px;
+    min-height: 500px;
+    margin: 0 auto 100px;
+    padding-bottom: 80px;
+    position: relative
+}
+
+body .warp .worksShow #masonry {
+    padding-left: 0;
+    padding-right: 0;
+    left: 12px
+}
+
+body .warp .worksShow #masonry .flowPic {
+    margin: 8px;
+    text-align: center;
+    float: left;
+    box-shadow: 0 0 3px #d5d2d2;
+    width: 160px;
+    min-height: 180px
+}
+
+body .warp .worksShow #masonry .flowPic img {
+    z-index: 888;
+    width: 100%;
+    margin: 0 auto
+}
+
+body .warp .worksShow #masonry .flowPic .wenzi-wrap {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    marigin: 0 auto;
+    padding-top: 1px;
+    height: 70px;
+    z-index: 988;
+    background-color: #fff
+}
+
+body .warp .worksShow #masonry .flowPic .wenzi-wrap .wenzi {
+    width: 85%;
+    text-align: left;
+    margin: 0 auto
+}
+
+body .warp .worksShow #masonry .flowPic .wenzi-wrap .wenzi .like {
+    display: inline;
+    float: right
+}
+
+body .warp .worksShow #masonry .flowPic .wenzi-wrap .wenzi .like a {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-top: 3px;
+    margin-right: 5px;
+    background-image: url(../img/icon-love.png);
+    background-repeat: no-repeat
+}
+
+body .warp .worksShow #masonry .flowPic .wenzi-wrap .wenzi .like .changeHeart {
+    background-image: url(../img/shixin-love.png)
+}
+
+body .warp .worksShow #masonry .flowPic .wenzi-wrap .wenzi .like em {
+    font-size: 10px;
+    color: #a4a4a4;
+    font-style: normal
+}
+
+body .warp .worksShow #masonry .flowPic .wenzi-wrap .wenzi h5 {
+    font-size: 12px;
+    font-weight: 500;
+    color: #424141;
+    line-height: 18px
+}
+
+body .warp .worksShow #masonry .flowPic .wenzi-wrap .wenzi span {
+    display: inline-block;
+    width: 66px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 10px;
+    color: #a4a4a4
+}
+
+body .warp .worksShow #masonry .flowPic:nth-child(5n) {
+    margin-right: 0
+}
+
+body .warp .worksShow #masonry .flowPic:hover {
+    box-shadow: 0 0 15px #8f8b8b
+}
+
+body .warp .worksShow .loadedWrap {
+    width: 200px;
+    height: 30px;
+    margin: 30px auto
+}
+
+body .warp .worksShow .loadedWrap .loaded {
+    width: 200px;
+    margin: 0 auto;
+    color: #a4a4a4;
+    font-size: 16px;
+    display: none
+}
+
+body .warp .worksShow .loadingTip {
+    width: 63px;
+    position: relative;
+    text-align: center;
+    margin: 0 auto
+}
+
+body .imageModel .imageBlock .imageWrap .loadingTip:before, body .warp .worksShow .loadingTip:before {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background: #00f;
+    content: '';
+    position: absolute;
+    background-color: #9b59b6;
+    animation: loadingTip_before 1.5s infinite ease-in-out
+}
+
+body .imageModel .imageBlock .imageWrap .loadingTip:after, body .warp .worksShow .loadingTip:after {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background: #00f;
+    content: '';
+    position: absolute;
+    background-color: #2ecc71;
+    left: 22px;
+    animation: loadingTip_after 1.5s infinite ease-in-out
+}
+
+@keyframes loadingTip_before {
+    0%, to {
+        transform: translateX(0) rotate(0deg)
+    }
+    50% {
+        transform: translateX(50px) scale(1.2) rotate(260deg);
+        background: #2ecc71;
+        border-radius: 0
+    }
+}
+
+@keyframes loadingTip_after {
+    0%, to {
+        transform: translateX(0)
+    }
+    50% {
+        transform: translateX(-50px) scale(1.2) rotate(-260deg);
+        background: #9b59b6;
+        border-radius: 0
+    }
+}
+
+body .backTop {
+    position: fixed;
+    right: 6%;
+    bottom: 230px;
+    display: none
+}
+
+body .backTop .glyphicon.glyphicon-arrow-up.to-top {
+    display: inline-block;
+    width: 33px;
+    height: 33px;
+    padding: 9px;
+    color: #000;
+    text-decoration: none;
+    border: 1px solid #afaeae
+}
+
+body .backTop .glyphicon.glyphicon-arrow-up.to-top:hover {
+    color: #33a6a9;
+    border-color: #33a6a9
+}
+
+body .imageModel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1001
+}
+
+body .imageModel .globalMask {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: .8;
+    background-color: #333
+}
+
+body .imageModel .imageBlock {
+    min-height: 200px;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    margin-top: -15%;
+    margin-left: -15%;
+    opacity: 0;
+    text-align: center
+}
+
+body .imageModel .imageBlock .imageWrap {
+    min-width: 300px;
+    min-height: 200px;
+    background-color: #fff
+}
+
+body .imageModel .imageBlock .imageWrap img {
+    vertical-align: middle
+}
+
+body .imageModel .imageBlock .imageWrap .loadingTip {
+    width: 63px;
+    position: absolute;
+    text-align: center;
+    top: 42%;
+    left: 40%
+}
+
+@keyframes loadingTip_before {
+    0%, to {
+        transform: translateX(0) rotate(0deg)
+    }
+    50% {
+        transform: translateX(50px) scale(1.2) rotate(260deg);
+        background: #2ecc71;
+        border-radius: 0
+    }
+}
+
+@keyframes loadingTip_after {
+    0%, to {
+        transform: translateX(0)
+    }
+    50% {
+        transform: translateX(-50px) scale(1.2) rotate(-260deg);
+        background: #9b59b6;
+        border-radius: 0
+    }
+}
+
+body .imageModel .imageBlock .tipModel {
+    background-color: #333;
+    position: relative;
+    bottom: 12px;
+    left: 0;
+    opacity: .8;
+    width: 100%;
+    height: 50px
+}
+
+body .imageModel .imageBlock .tipModel p {
+    text-align: center;
+    margin-top: -38px;
+    padding-top: 12px;
+    color: #fff
+}
+
+body .imageModel .imageBlock .nextArrow, body .imageModel .imageBlock .prevArrow {
+    display: block;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 40%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%
+}
+
+body .imageModel .imageBlock .prevArrow {
+    left: 5%;
+    background-image: url(../img/preArrow.png)
+}
+
+body .imageModel .imageBlock .nextArrow {
+    right: 5%;
+    background-image: url(../img/nextArrow.png)
+}
+
+body .imageModel .imageBlock .closeModel {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin: 0 auto;
+    background-image: url(../img/closeBtn.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80%
+}
+
+body .imageModel .imageBlock .tipAlert {
+    z-index: 2;
+    color: #fff;
+    font-size: 18px;
+    position: absolute;
+    top: 40%;
+    left: 33%
+}

@@ -134,7 +134,7 @@ $(function(){
                     	alert(data.msg);
                     	var localStorage = window.localStorage;
                         var curTime = new Date().getTime();
-                    	localStorage.setItem("user",JSON.stringify({"userId":data.data.userId,"userName":data.data.username,"time":curTime}));
+                    	localStorage.setItem("user",JSON.stringify({"userId":data.data.id,"userName":data.data.username,"time":curTime}));
                     	window.location.href="index";
 					}else{
                     	alert(data.msg);

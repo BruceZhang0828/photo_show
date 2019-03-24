@@ -45,4 +45,8 @@ public class IndexController  {
     public String brand(){
         return "brand";
     }
+    @RequestMapping(value = "/myPics")
+    public String myPics(){
+        return "myPics";
+    }
 }

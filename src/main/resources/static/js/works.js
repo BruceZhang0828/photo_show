@@ -25,13 +25,13 @@ function seeBigPic() {
         var i = $(e);
         $(".prevArrow").bind("click", function () {
             var e, t;
-            i.prev().find("img").attr("src") ? (e = i.prev().find("img").attr("src").split("!")[0] + "!photoWebLarge", t = i.prev().find(".wenzi h5").text() + "  (" + i.prev().find(".theme").text() + ")", $(".imageModel").find("img").attr("src", e), $(".imageModel").find(".tipModel p").text(t), i = $(i.prev()), $(".loadingTip").hide()) : ($(".tipAlert").removeClass("hidden"), $(".tipAlert").text("当前已是第一张"), setTimeout("$('.tipAlert').addClass('hidden')", 1e3))
+            i.prev().find("img").attr("src") ? (e = i.prev().find("img").attr("src").split("!")[0] + "", t = i.prev().find(".wenzi h5").text() + "  (" + i.prev().find(".theme").text() + ")", $(".imageModel").find("img").attr("src", e), $(".imageModel").find(".tipModel p").text(t), i = $(i.prev()), $(".loadingTip").hide()) : ($(".tipAlert").removeClass("hidden"), $(".tipAlert").text("当前已是第一张"), setTimeout("$('.tipAlert').addClass('hidden')", 1e3))
         }), $(".nextArrow").bind("click", function () {
             var e, t;
-            i.next().find("img").attr("src") ? (e = i.next().find("img").attr("src").split("!")[0] + "!photoWebLarge", t = i.next().find(".wenzi h5").text() + "  (" + i.next().find(".theme").text() + ")", $(".imageModel").find("img").attr("src", e), $(".imageModel").find(".tipModel p").text(t), i = $(i.next()), $(".loadingTip").hide()) : ($(".tipAlert").removeClass("hidden"), $(".tipAlert").text("当前已是最后一张"), setTimeout("$('.tipAlert').addClass('hidden')", 1e3))
+            i.next().find("img").attr("src") ? (e = i.next().find("img").attr("src").split("!")[0] + "", t = i.next().find(".wenzi h5").text() + "  (" + i.next().find(".theme").text() + ")", $(".imageModel").find("img").attr("src", e), $(".imageModel").find(".tipModel p").text(t), i = $(i.next()), $(".loadingTip").hide()) : ($(".tipAlert").removeClass("hidden"), $(".tipAlert").text("当前已是最后一张"), setTimeout("$('.tipAlert').addClass('hidden')", 1e3))
         })
     }, e.prototype.createModel = function () {
-        $(".imageModel").remove(), this.node = ['<div class="imageModel">', '<div class="globalMask"></div>', '<div class="imageBlock">', '<div class="imageWrap">', '<img src="' + this.src + '!photoWebLarge" alt="海马体照相馆" class="imageNode" style="position:absolute;left:-9999px;" >', '<div class="loadingTip"></div>', "</div>", '<div class="arrowModel">', '<a href="javascript:;" class="prevArrow" ></a>', '<a href="javascript:;" class="nextArrow" ></a>', "</div>", '<div class="tipModel">', "<p>" + this.text + "</p>", "</div>", '<a href="javascript:;" class="closeModel"></a>', '<div class="tipAlert hidden"></div>', "</div>", "</div>"].join(""), $(this.node).appendTo($(document.body)), $(".imageModel img").on("load", function () {
+        $(".imageModel").remove(), this.node = ['<div class="imageModel">', '<div class="globalMask"></div>', '<div class="imageBlock">', '<div class="imageWrap">', '<img src="' + this.src + '" alt="拾光秀照相馆" class="imageNode" style="position:absolute;left:-9999px;" >', '<div class="loadingTip"></div>', "</div>", '<div class="arrowModel">', '<a href="javascript:;" class="prevArrow" ></a>', '<a href="javascript:;" class="nextArrow" ></a>', "</div>", '<div class="tipModel">', "<p>" + this.text + "</p>", "</div>", '<a href="javascript:;" class="closeModel"></a>', '<div class="tipAlert hidden"></div>', "</div>", "</div>"].join(""), $(this.node).appendTo($(document.body)), $(".imageModel img").on("load", function () {
             var e = $(this), i = e.height(), t = e.width();
             $(".imageBlock").css({
                 marginTop: -(i / 2),
@@ -61,11 +61,13 @@ function navActive(e) {
 $(function () {
     $(".header-navgation .works").addClass("active"), $(".to-top").click(function () {
         return $("body,html").animate({scrollTop: 0}, 500), !1
-    }), $.post("/category/list", function (e) {
+    }),
+        $.post("/category/list",
+            function (e) {
         var i = e.data, t = "", a = "", o = "", n = "";
         if ("0" == e.code) {
             a = '<ul><li><a data-class="全部产品" data-id="0">全 部</a></li>';
-            for (var d in i) "8" !== i[d].P_Id && "14" !== i[d].P_Id && "16" !== i[d].P_Id && "17" !== i[d].P_Id && "18" !== i[d].P_Id && "19" !== i[d].P_Id && "22" !== i[d].P_Id && "23" !== i[d].P_Id && "24" !== i[d].P_Id && (o += '<li><a href="javascript:;" data-id="' + i[d].P_Id + '" data-class="' + i[d].P_Type + '">' + i[d].P_Name + "</a></li>");
+            for (var d in i) "8" !== i[d].P_Id && "14" !== i[d].id && "16" !== i[d].id && "17" !== i[d].id && "18" !== i[d].id && "19" !== i[d].id && "22" !== i[d].id && "23" !== i[d].id && "24" !== i[d].id && (o += '<li><a href="javascript:;" data-id="' + i[d].id + '" data-class="' + i[d].name + '">' + i[d].name + "</a></li>");
             n = '</ul><div class="nav-ClassStyle"><a href="javascript:;" style="display:none;">全年主打</a></div>', t = a + o + n, $(".navModel").html(t);
             var r = window.location.href;
             if (r.split("?")[1]) {
@@ -84,7 +86,7 @@ $(function () {
                 }, 200))
             })
         }
-    })
+    },"json")
 });
 var fuildImg = function () {
     var e = {id: 0, page: 1, pageSize: 15, eventType: "", nodeText: "", nodeContainer: "#masonry"};
@@ -95,18 +97,19 @@ var fuildImg = function () {
                 a.createNode()
             }, createNode: function () {
                 "scroll" === e.eventType && e.page++;
-                var i = {product: e.id, page: e.page, pageSize: e.pageSize};
-                $(".loadingTip").show(), $.post("/categoryimage/list", i, function (i) {
-                    var t = i.msg;
-                    if (0 == i.error) {
+                var i = {category_id: e.id, page: e.page, pageSize: e.pageSize};
+                $(".loadingTip").show(),
+                    $.post("/categoryimage/list",i, function (i) {
+                    var t = i.list;
+                    if (t&&t.length>0) {
                         var o = "";
                         if (null == t) return $(".loadingTip").hide(), $(".loaded").fadeIn(), setTimeout(function () {
                             $(".loaded").fadeOut()
                         }, 2e3), !1;
-                        for (var n in t) o += '<div class="flowPic" data-category="' + t[n].PH_Product.P_Type + '"><img src="' + t[n].PH_Path + '!photo.pc.mark" alt=""><div class="wenzi-wrap"><div class="wenzi"><h5>' + t[n].PH_Product.P_Type + '</h5><span class="theme">' + t[n].PH_Product.P_Name + '</span><div class="like"><a href="javascript:;" class="heart" id="like' + t[n].PH_Id + '" rel="like"></a><em id="likeCount' + t[n].PH_Id + '">' + t[n].PH_Praise + "</em></div></div></div></div>";
+                        for (var n in t) o += '<div class="flowPic" data-category="' + "照片" + '"><img src="' + t[n].url +'" alt=""><div class="wenzi-wrap"><div class="wenzi"><h5>' + "照片"+ '</h5><span class="theme">' + '照片' + '</span><div class="like"><a href="javascript:;" class="heart" id="like' + t[n].id + '" rel="like"></a><em id="likeCount' + t[n].id + '">' + "照片" + "</em></div></div></div></div>";
                         e.textNode = o, a.updateView(e.eventType)
                     }
-                })
+                },"json")
             }, updateView: function (i) {
                 var t = $("#masonry").masonry({
                     itemSelector: ".flowPic",

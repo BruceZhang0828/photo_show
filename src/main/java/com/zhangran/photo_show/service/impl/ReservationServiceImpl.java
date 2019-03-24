@@ -29,4 +29,13 @@ public class ReservationServiceImpl extends ServiceImpl<ReservationDao, Reservat
 
         return new PageUtils(page);
     }
+
+    @Override
+    public boolean updateStateById(String id) {
+        ReservationEntity entity = new ReservationEntity();
+        entity.setId(Long.valueOf(id));
+        entity.setState(2);
+        boolean b = this.updateById(entity);
+        return b;
+    }
 }

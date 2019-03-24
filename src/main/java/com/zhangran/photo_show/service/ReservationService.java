@@ -17,5 +17,7 @@ import java.util.Map;
 public interface ReservationService extends IService<ReservationEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    boolean updateStateById(String id);
 }
 
