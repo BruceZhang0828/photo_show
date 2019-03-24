@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>作品展示</title>
+    <link href="../static/assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="../static/css/sweetalert.css" rel="stylesheet" />
     <link rel="stylesheet" href="../static/css/lightbox.css">
     <link rel="stylesheet" href="../static/css/works.css">
 </head>
@@ -15,10 +17,165 @@
                 <div class="dummy"></div>
                 <div class="bannerPic"></div>
             </div>
-            <div class="navModel"><ul><li class="fontBigger"><a data-class="全部产品" data-id="0">全 部</a></li><li><a href="javascript:;" data-id="2" data-class="功能类">精致签证照</a></li><li><a href="javascript:;" data-id="15" data-class="轻写真">全家福</a></li><li><a href="javascript:;" data-id="25" data-class="轻写真">文艺照</a></li><li><a href="javascript:;" data-id="29" data-class="轻写真">宠物照</a></li><li><a href="javascript:;" data-id="157" data-class="功能类">结婚照</a></li><li><a href="javascript:;" data-id="189" data-class="功能类">精致证件照</a></li><li><a href="javascript:;" data-id="194" data-class="功能类">职业形象照(AB类6人以上)</a></li><li><a href="javascript:;" data-id="196" data-class="功能类">职业形象照(DE类6人以上)</a></li><li><a href="javascript:;" data-id="241" data-class="功能类">职业形象照</a></li><li><a href="javascript:;" data-id="300" data-class="轻写真">生日照-单人</a></li><li><a href="javascript:;" data-id="303" data-class="轻写真">生日照-闺蜜</a></li><li><a href="javascript:;" data-id="306" data-class="轻写真">生日照-情侣</a></li></ul><div class="nav-ClassStyle"><a href="javascript:;" style="display:none;">全年主打</a></div></div>
+            <div class="navModel">
+                <!--<ul>
+                    <li class="fontBigger"><a data-class="全部产品" data-id="0">全 部</a></li>
+                    <li th:class="${cateStat.index} eq 0?'layui-this'" th:each="category,cateStat : ${categories}" th:id="${category.id}" th:text="${category.name}" >
+                        <a href="javascript:;" th:attr="data-id=${category.id}"  data-class="功能类" th:text="${category.name}"></a>
+                    </li>
+                    &lt;!&ndash;<li><a href="javascript:;" data-id="2" data-class="功能类">精致签证照</a></li>
+                    <li><a href="javascript:;" data-id="15" data-class="轻写真">全家福</a></li>
+                    <li><a href="javascript:;" data-id="25" data-class="轻写真">文艺照</a></li>
+                    <li><a href="javascript:;" data-id="29" data-class="轻写真">宠物照</a></li>
+                    <li><a href="javascript:;" data-id="157" data-class="功能类">结婚照</a></li>
+                    <li><a href="javascript:;" data-id="189" data-class="功能类">精致证件照</a></li>
+                    <li><a href="javascript:;" data-id="194" data-class="功能类">职业形象照(AB类6人以上)</a></li>
+                    <li><a href="javascript:;" data-id="196" data-class="功能类">职业形象照(DE类6人以上)</a></li>
+                    <li><a href="javascript:;" data-id="241" data-class="功能类">职业形象照</a></li>
+                    <li><a href="javascript:;" data-id="300" data-class="轻写真">生日照-单人</a></li>
+                    <li><a href="javascript:;" data-id="303" data-class="轻写真">生日照-闺蜜</a></li>
+                    <li><a href="javascript:;" data-id="306" data-class="轻写真">生日照-情侣</a></li>&ndash;&gt;
+                </ul>-->
+                <div class="nav-ClassStyle"><a href="javascript:;" style="display:none;">全年主打</a></div>
+            </div>
             <div class="worksShow">
                 <div id="masonry" class="container-fluid" style="position: relative; width: 1000px; height: 588px;">
-                    <div class="flowPic" data-category="轻写真" style="position: absolute; left: 0px; top: 0px;"><img src="https://cdn.haimati.cn/upload/2557bd1922d15d4fce831ddca9691c2d!photo.pc.mark" alt=""><div class="wenzi-wrap"><div class="wenzi"><h5>轻写真</h5><span class="theme">情侣</span><div class="like"><a href="javascript:;" class="heart" id="like585" rel="like"></a><em id="likeCount585">0</em></div></div></div></div><div class="flowPic" data-category="轻写真" style="position: absolute; left: 200px; top: 0px;"><img src="https://cdn.haimati.cn/upload/ee1af264bc53f90b6330b06b82e2354d!photo.pc.mark" alt=""><div class="wenzi-wrap"><div class="wenzi"><h5>轻写真</h5><span class="theme">情侣</span><div class="like"><a href="javascript:;" class="heart" id="like584" rel="like"></a><em id="likeCount584">0</em></div></div></div></div><div class="flowPic" data-category="轻写真" style="position: absolute; left: 400px; top: 0px;"><img src="https://cdn.haimati.cn/upload/7084d26e3cdcbdf9f2065277288c8dc4!photo.pc.mark" alt=""><div class="wenzi-wrap"><div class="wenzi"><h5>轻写真</h5><span class="theme">情侣</span><div class="like"><a href="javascript:;" class="heart" id="like583" rel="like"></a><em id="likeCount583">0</em></div></div></div></div><div class="flowPic" data-category="轻写真" style="position: absolute; left: 600px; top: 0px;"><img src="https://cdn.haimati.cn/upload/1992d1e382c34d5f6db41321380573cb!photo.pc.mark" alt=""><div class="wenzi-wrap"><div class="wenzi"><h5>轻写真</h5><span class="theme">情侣</span><div class="like"><a href="javascript:;" class="heart" id="like582" rel="like"></a><em id="likeCount582">0</em></div></div></div></div><div class="flowPic" data-category="轻写真" style="position: absolute; left: 800px; top: 0px;"><img src="https://cdn.haimati.cn/upload/a3e4fec67be71e348d100b29625cd4e6!photo.pc.mark" alt=""><div class="wenzi-wrap"><div class="wenzi"><h5>轻写真</h5><span class="theme">情侣</span><div class="like"><a href="javascript:;" class="heart" id="like581" rel="like"></a><em id="likeCount581">0</em></div></div></div></div><div class="flowPic" data-category="轻写真" style="position: absolute; left: 0px; top: 196px;"><img src="https://cdn.haimati.cn/upload/84a6c2d0d6c9244c94d3570131eb8745!photo.pc.mark" alt=""><div class="wenzi-wrap"><div class="wenzi"><h5>轻写真</h5><span class="theme">情侣</span><div class="like"><a href="javascript:;" class="heart" id="like580" rel="like"></a><em id="likeCount580">0</em></div></div></div></div><div class="flowPic" data-category="轻写真" style="position: absolute; left: 200px; top: 196px;"><img src="https://cdn.haimati.cn/upload/90d8b0f7345e2e172debd8a02a052cf2!photo.pc.mark" alt=""><div class="wenzi-wrap"><div class="wenzi"><h5>轻写真</h5><span class="theme">情侣</span><div class="like"><a href="javascript:;" class="heart" id="like579" rel="like"></a><em id="likeCount579">0</em></div></div></div></div><div class="flowPic" data-category="轻写真" style="position: absolute; left: 400px; top: 196px;"><img src="https://cdn.haimati.cn/upload/7233a4563b4a24e10b68a9f7e10385aa!photo.pc.mark" alt=""><div class="wenzi-wrap"><div class="wenzi"><h5>轻写真</h5><span class="theme">情侣</span><div class="like"><a href="javascript:;" class="heart" id="like578" rel="like"></a><em id="likeCount578">0</em></div></div></div></div><div class="flowPic" data-category="轻写真" style="position: absolute; left: 600px; top: 196px;"><img src="https://cdn.haimati.cn/upload/17ed22cd2535cb96cbc9340e48005417!photo.pc.mark" alt=""><div class="wenzi-wrap"><div class="wenzi"><h5>轻写真</h5><span class="theme">情侣</span><div class="like"><a href="javascript:;" class="heart" id="like577" rel="like"></a><em id="likeCount577">0</em></div></div></div></div><div class="flowPic" data-category="轻写真" style="position: absolute; left: 800px; top: 196px;"><img src="https://cdn.haimati.cn/upload/68622f9144ef09a8f10567a733311581!photo.pc.mark" alt=""><div class="wenzi-wrap"><div class="wenzi"><h5>轻写真</h5><span class="theme">闺蜜</span><div class="like"><a href="javascript:;" class="heart" id="like575" rel="like"></a><em id="likeCount575">0</em></div></div></div></div><div class="flowPic" data-category="轻写真" style="position: absolute; left: 0px; top: 392px;"><img src="https://cdn.haimati.cn/upload/68dd19f6acd814a6a32fc542313a2670!photo.pc.mark" alt=""><div class="wenzi-wrap"><div class="wenzi"><h5>轻写真</h5><span class="theme">闺蜜</span><div class="like"><a href="javascript:;" class="heart" id="like574" rel="like"></a><em id="likeCount574">0</em></div></div></div></div><div class="flowPic" data-category="轻写真" style="position: absolute; left: 200px; top: 392px;"><img src="https://cdn.haimati.cn/upload/440727aa10e34301a943641059139cbb!photo.pc.mark" alt=""><div class="wenzi-wrap"><div class="wenzi"><h5>轻写真</h5><span class="theme">闺蜜</span><div class="like"><a href="javascript:;" class="heart" id="like573" rel="like"></a><em id="likeCount573">0</em></div></div></div></div><div class="flowPic" data-category="轻写真" style="position: absolute; left: 400px; top: 392px;"><img src="https://cdn.haimati.cn/upload/d370224409d64dc4a196939ea6f1fbc2!photo.pc.mark" alt=""><div class="wenzi-wrap"><div class="wenzi"><h5>轻写真</h5><span class="theme">闺蜜</span><div class="like"><a href="javascript:;" class="heart" id="like572" rel="like"></a><em id="likeCount572">0</em></div></div></div></div><div class="flowPic" data-category="轻写真" style="position: absolute; left: 600px; top: 392px;"><img src="https://cdn.haimati.cn/upload/5dbcc5ef77ce0263157510cf86b111e2!photo.pc.mark" alt=""><div class="wenzi-wrap"><div class="wenzi"><h5>轻写真</h5><span class="theme">闺蜜</span><div class="like"><a href="javascript:;" class="heart" id="like571" rel="like"></a><em id="likeCount571">0</em></div></div></div></div><div class="flowPic" data-category="轻写真" style="position: absolute; left: 800px; top: 392px;"><img src="https://cdn.haimati.cn/upload/2f1df1734fbc33b482d5d2e1b3e6aed4!photo.pc.mark" alt=""><div class="wenzi-wrap"><div class="wenzi"><h5>轻写真</h5><span class="theme">闺蜜</span><div class="like"><a href="javascript:;" class="heart" id="like570" rel="like"></a><em id="likeCount570">0</em></div></div></div></div></div>
+                    <div class="flowPic" data-category="轻写真" style="position: absolute; left: 0px; top: 0px;"><img
+                            src="https://cdn.haimati.cn/upload/2557bd1922d15d4fce831ddca9691c2d!photo.pc.mark" alt="">
+                        <div class="wenzi-wrap">
+                            <div class="wenzi"><h5>轻写真</h5><span class="theme">情侣</span>
+                                <div class="like"><a href="javascript:;" class="heart" id="like585" rel="like"></a><em
+                                        id="likeCount585">0</em></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flowPic" data-category="轻写真" style="position: absolute; left: 200px; top: 0px;"><img
+                            src="https://cdn.haimati.cn/upload/ee1af264bc53f90b6330b06b82e2354d!photo.pc.mark" alt="">
+                        <div class="wenzi-wrap">
+                            <div class="wenzi"><h5>轻写真</h5><span class="theme">情侣</span>
+                                <div class="like"><a href="javascript:;" class="heart" id="like584" rel="like"></a><em
+                                        id="likeCount584">0</em></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flowPic" data-category="轻写真" style="position: absolute; left: 400px; top: 0px;"><img
+                            src="https://cdn.haimati.cn/upload/7084d26e3cdcbdf9f2065277288c8dc4!photo.pc.mark" alt="">
+                        <div class="wenzi-wrap">
+                            <div class="wenzi"><h5>轻写真</h5><span class="theme">情侣</span>
+                                <div class="like"><a href="javascript:;" class="heart" id="like583" rel="like"></a><em
+                                        id="likeCount583">0</em></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flowPic" data-category="轻写真" style="position: absolute; left: 600px; top: 0px;"><img
+                            src="https://cdn.haimati.cn/upload/1992d1e382c34d5f6db41321380573cb!photo.pc.mark" alt="">
+                        <div class="wenzi-wrap">
+                            <div class="wenzi"><h5>轻写真</h5><span class="theme">情侣</span>
+                                <div class="like"><a href="javascript:;" class="heart" id="like582" rel="like"></a><em
+                                        id="likeCount582">0</em></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flowPic" data-category="轻写真" style="position: absolute; left: 800px; top: 0px;"><img
+                            src="https://cdn.haimati.cn/upload/a3e4fec67be71e348d100b29625cd4e6!photo.pc.mark" alt="">
+                        <div class="wenzi-wrap">
+                            <div class="wenzi"><h5>轻写真</h5><span class="theme">情侣</span>
+                                <div class="like"><a href="javascript:;" class="heart" id="like581" rel="like"></a><em
+                                        id="likeCount581">0</em></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flowPic" data-category="轻写真" style="position: absolute; left: 0px; top: 196px;"><img
+                            src="https://cdn.haimati.cn/upload/84a6c2d0d6c9244c94d3570131eb8745!photo.pc.mark" alt="">
+                        <div class="wenzi-wrap">
+                            <div class="wenzi"><h5>轻写真</h5><span class="theme">情侣</span>
+                                <div class="like"><a href="javascript:;" class="heart" id="like580" rel="like"></a><em
+                                        id="likeCount580">0</em></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flowPic" data-category="轻写真" style="position: absolute; left: 200px; top: 196px;"><img
+                            src="https://cdn.haimati.cn/upload/90d8b0f7345e2e172debd8a02a052cf2!photo.pc.mark" alt="">
+                        <div class="wenzi-wrap">
+                            <div class="wenzi"><h5>轻写真</h5><span class="theme">情侣</span>
+                                <div class="like"><a href="javascript:;" class="heart" id="like579" rel="like"></a><em
+                                        id="likeCount579">0</em></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flowPic" data-category="轻写真" style="position: absolute; left: 400px; top: 196px;"><img
+                            src="https://cdn.haimati.cn/upload/7233a4563b4a24e10b68a9f7e10385aa!photo.pc.mark" alt="">
+                        <div class="wenzi-wrap">
+                            <div class="wenzi"><h5>轻写真</h5><span class="theme">情侣</span>
+                                <div class="like"><a href="javascript:;" class="heart" id="like578" rel="like"></a><em
+                                        id="likeCount578">0</em></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flowPic" data-category="轻写真" style="position: absolute; left: 600px; top: 196px;"><img
+                            src="https://cdn.haimati.cn/upload/17ed22cd2535cb96cbc9340e48005417!photo.pc.mark" alt="">
+                        <div class="wenzi-wrap">
+                            <div class="wenzi"><h5>轻写真</h5><span class="theme">情侣</span>
+                                <div class="like"><a href="javascript:;" class="heart" id="like577" rel="like"></a><em
+                                        id="likeCount577">0</em></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flowPic" data-category="轻写真" style="position: absolute; left: 800px; top: 196px;"><img
+                            src="https://cdn.haimati.cn/upload/68622f9144ef09a8f10567a733311581!photo.pc.mark" alt="">
+                        <div class="wenzi-wrap">
+                            <div class="wenzi"><h5>轻写真</h5><span class="theme">闺蜜</span>
+                                <div class="like"><a href="javascript:;" class="heart" id="like575" rel="like"></a><em
+                                        id="likeCount575">0</em></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flowPic" data-category="轻写真" style="position: absolute; left: 0px; top: 392px;"><img
+                            src="https://cdn.haimati.cn/upload/68dd19f6acd814a6a32fc542313a2670!photo.pc.mark" alt="">
+                        <div class="wenzi-wrap">
+                            <div class="wenzi"><h5>轻写真</h5><span class="theme">闺蜜</span>
+                                <div class="like"><a href="javascript:;" class="heart" id="like574" rel="like"></a><em
+                                        id="likeCount574">0</em></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flowPic" data-category="轻写真" style="position: absolute; left: 200px; top: 392px;"><img
+                            src="https://cdn.haimati.cn/upload/440727aa10e34301a943641059139cbb!photo.pc.mark" alt="">
+                        <div class="wenzi-wrap">
+                            <div class="wenzi"><h5>轻写真</h5><span class="theme">闺蜜</span>
+                                <div class="like"><a href="javascript:;" class="heart" id="like573" rel="like"></a><em
+                                        id="likeCount573">0</em></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flowPic" data-category="轻写真" style="position: absolute; left: 400px; top: 392px;"><img
+                            src="https://cdn.haimati.cn/upload/d370224409d64dc4a196939ea6f1fbc2!photo.pc.mark" alt="">
+                        <div class="wenzi-wrap">
+                            <div class="wenzi"><h5>轻写真</h5><span class="theme">闺蜜</span>
+                                <div class="like"><a href="javascript:;" class="heart" id="like572" rel="like"></a><em
+                                        id="likeCount572">0</em></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flowPic" data-category="轻写真" style="position: absolute; left: 600px; top: 392px;"><img
+                            src="https://cdn.haimati.cn/upload/5dbcc5ef77ce0263157510cf86b111e2!photo.pc.mark" alt="">
+                        <div class="wenzi-wrap">
+                            <div class="wenzi"><h5>轻写真</h5><span class="theme">闺蜜</span>
+                                <div class="like"><a href="javascript:;" class="heart" id="like571" rel="like"></a><em
+                                        id="likeCount571">0</em></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flowPic" data-category="轻写真" style="position: absolute; left: 800px; top: 392px;"><img
+                            src="https://cdn.haimati.cn/upload/2f1df1734fbc33b482d5d2e1b3e6aed4!photo.pc.mark" alt="">
+                        <div class="wenzi-wrap">
+                            <div class="wenzi"><h5>轻写真</h5><span class="theme">闺蜜</span>
+                                <div class="like"><a href="javascript:;" class="heart" id="like570" rel="like"></a><em
+                                        id="likeCount570">0</em></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="loadedWrap">
                     <p class="loaded">照片加载完了哦</p>
                 </div>
@@ -29,8 +186,17 @@
         <div class="backTop" style="display: none;">
             <a href="#" class="glyphicon glyphicon-arrow-up to-top"></a>
         </div>
-
     </div>
 </div>
+<script src="../static/js/AnimOnScroll.js"></script>
+<script type="text/javascript" src="../static/js/jquery-1.12.4.min.js"></script>
+<script src="../static/assets/js/bootstrap.js"></script>
+<script src="../static/js/classie.js"></script>
+<script src="../static/js/imagesloaded.pkgd.min.js"></script>
+<script src="../static/js/lightbox.min.js"></script>
+<script src="../static/js/masonry.pkgd.min.js"></script>
+<script src="../static/js/modernizr.custom.js"></script>
+<script src="../static/js/sweetalert.min.js"></script>
+<script src="../static/js/works.js"></script>
 </body>
 </html>

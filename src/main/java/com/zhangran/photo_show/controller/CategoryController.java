@@ -1,6 +1,7 @@
 package com.zhangran.photo_show.controller;
 
 import com.zhangran.photo_show.service.CategoryService;
+import com.zhangran.photo_show.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,16 +19,24 @@ import org.springframework.web.servlet.ModelAndView;
  * @Date: 2019/3/17 22:40
  * @Version: 1.0
  **/
-@Controller
+@RestController
 @RequestMapping("/category")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
-    @RequestMapping(value = "list",method = RequestMethod.GET)
-    public String list(Model model){
-        //ModelAndView map = new ModelAndView();
-        model.addAttribute("categories",categoryService.findList());
-        //map.setViewName("/category/category");
-        return "category";
+    @RequestMapping(value = "list",method = RequestMethod.POST)
+    public Response list(Model model){
+        Response response = new Response();
+        //model.addAttribute("categories",categoryService.findList());
+        try {
+            response.setData(categoryService.findList());
+            response.setCode("0");
+            response.setMsg("查询成功");
+        }catch (Exception e){
+            //response.setData(categoryService.findList());
+            response.setCode("1");
+            response.setMsg("查询失败");
+        }
+        return response;
     }
 }

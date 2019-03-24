@@ -31,7 +31,7 @@ public class IndexController  {
     }
     @RequestMapping(value = "/works")
     public String works(){
-        return "category";
+        return "works";
     }
     @RequestMapping(value = "/activity")
     public String activity(){
