@@ -21,6 +21,7 @@ public class ImageServiceImpl extends ServiceImpl<ImageDao, ImageEntity> impleme
         Page<ImageEntity> page = this.selectPage(
                 new Query<ImageEntity>(params).getPage(),
                 new EntityWrapper<ImageEntity>().eq(params.get("uploadId") != null,"upload_id", params.get("uploadId"))
+                        .eq(params.get("userId") != null,"user_id", params.get("userId"))
         );
 
         return new PageUtils(page);

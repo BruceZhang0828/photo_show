@@ -121,7 +121,7 @@
             console.log("登录过期");
             window.localStorage.removeItem("user");
         }else{
-            userId = JSON.parse(user).id;
+            userId = JSON.parse(user).userId;
             $("#userId").val(userId);
         }
     }

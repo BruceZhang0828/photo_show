@@ -29,10 +29,10 @@ public class ImageController {
      * 列表分页
      */
     @RequestMapping("/page")
-    public Response<PageUtils> page(@RequestParam Map<String, Object> params) {
+    public PageUtils page(@RequestParam Map<String, Object> params) {
 
         PageUtils page = imageService.queryPage(params);
-        return new Response<>("1", "获取成功", page);
+        return page;
     }
 
     /**

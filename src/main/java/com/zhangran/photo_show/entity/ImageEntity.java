@@ -40,6 +40,11 @@ public class ImageEntity implements Serializable {
 	private Date createDate;
 
 	/**
+	 * 图片名称
+	 */
+	private String name;
+
+	/**
 	 * 设置：
 	 */
 	public void setId(Long id) {
@@ -98,5 +103,18 @@ public class ImageEntity implements Serializable {
 	 */
 	public Date getCreateDate() {
 		return createDate;
+	}
+
+	/**
+	 * 设置：图片名称
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	/**
+	 * 获取：图片名称
+	 */
+	public String getName() {
+		return name;
 	}
 }
