@@ -173,7 +173,7 @@ layui.use("flow",function(){
                         for(var i = 0; i < data.list.length; i++){
                             var   preLi = '<li><div class="layui-card img-card">';
                             var imageName = '<div class="layui-card-header">'+data.list[i].name+'</div>';
-                            var iamge = '<div class="img-box">'+' <img src="'+data.list[i].url+'" alt="'+data.list[i].name+'" title="'+data.list[i].name+'">'+'</div>';
+                            var iamge = '<div class="img-box">'+' <img style="width: 100%;height: 100%" src="'+data.list[i].url+'" alt="'+data.list[i].name+'" title="'+data.list[i].name+'">'+'</div>';
                             var imageDiv = '<div class="layui-card-body">'+iamge+'</div>';
                             var nextLi = '</div></li>';
                             lis.push(preLi+imageName+imageDiv+nextLi);
