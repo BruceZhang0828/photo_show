@@ -120,10 +120,17 @@
         if(new Date().getTime()-user.time>10*60*60*1000){
             console.log("登录过期");
             window.localStorage.removeItem("user");
+            $(".inUser").hide();
+            $(".notUser").show();
         }else{
             userId = JSON.parse(user).userId;
             $("#userId").val(userId);
+            $(".inUser").show();
+            $(".notUser").hide();
         }
+    }else{
+        $(".inUser").hide();
+        $(".notUser").show();
     }
     layui.use('table', function(){
         var table = layui.table;
@@ -180,7 +187,6 @@
             ,limit:10
             ,limits:[5,10,20]
         });
-
         //头工具栏事件
         table.on('toolbar(test)', function(obj){
             var checkStatus = table.checkStatus(obj.config.id);
@@ -229,12 +235,21 @@
                         title:'添加预约',
                         type:2,
                         content:'/reservationAdd',
-                        area:['700px','500px']
+                        area:['700px','500px'],
+                        end:function(){
+                            table.reload("test",{
+                                where:{
+                                    'userId':userId
+                                },
+                                page:{
+                                    curr:1
+                                }
+                            });
+                        }
                     });
                     break;
             };
         });
-
         //监听行工具事件
         table.on('tool(test)', function(obj){
             var data = obj.data;

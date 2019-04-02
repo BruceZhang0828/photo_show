@@ -119,8 +119,7 @@ $(function(){
 		}
     }
 
-
-	$('#reg_form').submit(function() {
+    $("#submit_button").click(function () {
 		check_user_name();
 		check_pwd();
 		check_cpwd();
@@ -128,6 +127,24 @@ $(function(){
 		check_mobile();
 		if(error_name == false && error_password == false && error_check_password == false && error_email == false && error_check == false)
 		{
+            $.ajax({
+                url: "/user/register",
+                type: "post",
+                dataType: "json",
+                data: $('#reg_form').serialize(),
+                success: function (data) {
+                    console.log(data.data);
+                    if(data.code=="1"){
+                        alert(data.msg);
+                        var localStorage = window.localStorage;
+                        var curTime = new Date().getTime();
+                        localStorage.setItem("user",JSON.stringify({"userId":data.data.id,"userName":data.data.username,"time":curTime}));
+                        window.location.href="index";
+                    }else{
+                        alert(data.msg);
+                    }
+                }
+            });
 			return true;
 		}
 		else

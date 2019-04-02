@@ -12,7 +12,6 @@ public class IndexController  {
     public String index(){
         return "index";
     }
-
     @RequestMapping(value = "/login")
     public String login(){
         return "login";
@@ -48,5 +47,9 @@ public class IndexController  {
     @RequestMapping(value = "/myPics")
     public String myPics(){
         return "myPics";
+    }
+    @RequestMapping(value = "/vip")
+    public String vip(){
+        return "vip";
     }
 }

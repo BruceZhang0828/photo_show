@@ -126,6 +126,26 @@
 <script src="../static/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
+    var userId;
+    $(function(){
+        var user = window.localStorage.user;
+        if(user){
+            if(new Date().getTime()-user.time>10*60*60*1000){
+                console.log("登录过期");
+                window.localStorage.removeItem("user");
+                $(".inUser").hide();
+                $(".notUser").show();
+
+            }else{
+                userId = JSON.parse(user).userId;
+                $(".inUser").show();
+                $(".notUser").hide();
+            }
+        }else{
+            $(".inUser").hide();
+            $(".notUser").show();
+        }
+    });
     layui.use(['form', 'layedit', 'laydate'], function(){
         var form = layui.form
             ,layer = layui.layer
@@ -189,6 +209,5 @@
 
     });
 </script>
-
 </body>
 </html>

@@ -104,5 +104,27 @@
     </div>
 </footer>
 <script rel="script" src="../static/js/activity.js"></script>
+<script>
+    var userId;
+    $(function(){
+        var user = window.localStorage.user;
+        if(user){
+            if(new Date().getTime()-user.time>10*60*60*1000){
+                console.log("登录过期");
+                window.localStorage.removeItem("user");
+                $(".inUser").hide();
+                $(".notUser").show();
+
+            }else{
+                userId = JSON.parse(user).userId;
+                $(".inUser").show();
+                $(".notUser").hide();
+            }
+        }else{
+            $(".inUser").hide();
+            $(".notUser").show();
+        }
+    });
+</script>
 </body>
 </html>

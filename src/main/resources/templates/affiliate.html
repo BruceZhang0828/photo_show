@@ -328,5 +328,27 @@
 <script type="text/javascript" src="../static/js/jquery-1.12.4.min.js"></script>
 <script src="../static/assets/js/bootstrap.js"></script>
 <script src="../static/js/affiliate.js"></script>
+<script>
+    var userId;
+    $(function(){
+        var user = window.localStorage.user;
+        if(user){
+            if(new Date().getTime()-user.time>10*60*60*1000){
+                console.log("登录过期");
+                window.localStorage.removeItem("user");
+                $(".inUser").hide();
+                $(".notUser").show();
+
+            }else{
+                userId = JSON.parse(user).userId;
+                $(".inUser").show();
+                $(".notUser").hide();
+            }
+        }else{
+            $(".inUser").hide();
+            $(".notUser").show();
+        }
+    });
+</script>
 </body>
 </html>

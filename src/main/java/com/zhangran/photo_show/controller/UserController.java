@@ -48,9 +48,10 @@ public class UserController {
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(registerDTO, userEntity);
         userEntity.setPassword(DigestUtils.sha256Hex(userEntity.getPassword()));
-        userService.insert(userEntity);
-
-        return new Response("1", "注册成功");
+        boolean insert = userService.insert(userEntity);
+        Response response = new Response("1", "注册成功");
+        response.setData(userEntity);
+        return response;
     }
 
     /**

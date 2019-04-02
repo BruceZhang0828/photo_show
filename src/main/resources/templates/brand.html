@@ -195,5 +195,27 @@
 <script src="../static/assets/js/bootstrap.js"></script>
 <script src="../static/js/swiper-3.3.1.min.js"></script>
 <script src="../static/js/brand.js"></script>
+<script>
+    var userId;
+    $(function(){
+        var user = window.localStorage.user;
+        if(user){
+            if(new Date().getTime()-user.time>10*60*60*1000){
+                console.log("登录过期");
+                window.localStorage.removeItem("user");
+                $(".inUser").hide();
+                $(".notUser").show();
+
+            }else{
+                userId = JSON.parse(user).userId;
+                $(".inUser").show();
+                $(".notUser").hide();
+            }
+        }else{
+            $(".inUser").hide();
+            $(".notUser").show();
+        }
+    });
+</script>
 </body>
 </html>
