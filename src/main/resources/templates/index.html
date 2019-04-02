@@ -58,6 +58,7 @@
 							<li class="inUser">
 								<a href="javascript:void(0)" onclick="getReservation()">我的预约</a>
 								<a href="javascript:void(0)" onclick="getMyPics()">我的照片</a>
+								<a href="javascript:void(0)" onclick="getMyOrder()">我的订单</a>
 							</li>
 						</ul>
 					</li>
@@ -390,6 +391,14 @@
 	        console.log("登录过期");
 		}
     }
+
+    function getMyOrder(){
+        if(userId){
+            window.location.href="/getMyOrder";
+        }else{
+            console.log("登录过期");
+        }
+	}
 	/*$("#yuyue").onclick(function(){
 
 	    if(1){

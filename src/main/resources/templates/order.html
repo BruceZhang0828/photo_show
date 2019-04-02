@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>我的预约</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../static/assets/css/fancybox/jquery.fancybox.css">
+    <link href="../static/assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="../static/assets/css/bootstrap-theme.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/assets/css/slippry.css">
+    <link href="../static/assets/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/assets/color/default.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+<header>
+    <div id="navigation" class="navbar navbar-inverse navbar-fixed-top default" role="navigation">
+        <div class="container">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">拾光秀照相馆</a>
+            </div>
+
+            <div class="navigation">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <nav>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="current"><a href="index.html">首页</a></li>
+                            <li><a href="brand">品牌</a></li>
+                            <li><a href="activity">店铺</a></li>
+                            <!--<li><a href="/category/list">作品</a></li>-->
+                            <li><a href="works">作品</a></li>
+                            <li><a id="yuyue" href="affiliate">合伙人</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">设置
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="notUser">
+                                        <a href="register">注册</a>
+                                    </li>
+                                    <li class="notUser">
+                                        <a href="login">登录</a>
+                                    </li>
+                                    <li class="inUser">
+                                        <a href="javascript:void(0)" onclick="getReservation()">我的预约</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div><!-- /.navbar-collapse -->
+            </div>
+        </div>
+    </div>
+</header>
+<div style="margin: 90px 275px">
+    <table class="layui-hide" id="test" lay-filter="test"></table>
+</div>
+<footer>
+    <div class="verybottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="aligncenter">
+                        <ul class="social-network social-circle">
+                            <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                            <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="aligncenter">
+                        <p>
+                            Copyright © 2016. 拾光秀@ All rights reserved
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+
+        <button class="layui-btn layui-btn-radius layui-btn-sm" lay-event="add">添加预约</button>
+        <button class="layui-btn layui-btn-radius layui-btn-danger layui-btn-sm" lay-event="getCheckData">取消预约</button>
+        <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>-->
+        <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>-->
+    </div>
+</script>
+
+<!--<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>-->
+
+<script type="text/javascript" src="../static/js/jquery-1.12.4.min.js"></script>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+
+<script>
+    var user = window.localStorage.user;
+    var userId;
+    if(user){
+        if(new Date().getTime()-user.time>10*60*60*1000){
+            console.log("登录过期");
+            window.localStorage.removeItem("user");
+            $(".inUser").hide();
+            $(".notUser").show();
+        }else{
+            userId = JSON.parse(user).userId;
+            $("#userId").val(userId);
+            $(".inUser").show();
+            $(".notUser").hide();
+        }
+    }else{
+        $(".inUser").hide();
+        $(".notUser").show();
+    }
+    layui.use('table', function(){
+        var table = layui.table;
+        var util = layui.util;
+        table.render({
+            elem: '#test'
+            ,url:'/order/list'
+            ,toolbar: '#toolbarDemo'
+            ,title: '我的订单列表'
+            ,where:{'userId':userId}
+            ,cols: [
+                [{type: 'checkbox', fixed: 'left'},
+                {field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
+                ,{field:'username', title:'用户名', width:120}
+                ,{field:'mobile', title:'手机号', width:120}
+                ,{field:'reservationDate', title:'预约日期', width:180,templet:function(d){
+                    if(d.reservationDate){
+                        return util.toDateString(d.reservationDate, "yyyy-MM-dd HH:mm:ss");
+                        }else{
+                        return util.toDateString(d.commPosttime*1000, "yyyy-MM-dd HH:mm:ss");
+                        }
+                    }
+                }
+                ,{field:'creatDate', title:'创建日期', width:180,templet:function(d){
+                    if(d.creatDate){
+                        return util.toDateString(d.creatDate, "yyyy-MM-dd HH:mm:ss");
+                        }else{
+                        return util.toDateString(d.creatDate*1000, "yyyy-MM-dd HH:mm:ss");
+                        }
+                    }
+                }
+                ,{field:'state', title:'状态', width:120,templet:function (d) {
+                     if(d.state){
+                         switch(d.state){
+                             case 0:
+                                 return "未处理";
+                                 break;
+                             case 1:
+                                 return "已经处理";
+                                 break;
+                             case 2:
+                                 return "取消预约";
+                                 break;
+                         }
+
+                     }else{
+                         return "未处理";
+                     }
+                    }}
+                    ,{field:'remarks', title:'备注信息', width:180}
+                ]
+            ]
+            ,page: true
+            ,limit:10
+            ,limits:[5,10,20]
+        });
+        //头工具栏事件
+        table.on('toolbar(test)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'getCheckData': //取消预约
+                    var data = checkStatus.data;
+                    //console.log(JSON.stringify(data[0]).id);
+                    layer.msg('您确定要取消该预约?', {
+                        time: 20000, //20s后自动关闭
+                        btn: ['确定', '否'],
+                        yes:function(){
+                            $.ajax({
+                                url:"/reservation/update",
+                                data:{"id":data[0].id},
+                                type:'post',
+                                success:function(data){
+                                    console.log(data);
+                                    if(data){
+                                        if(data.data){
+                                            layer.alert("已经取消预约");
+                                            table.reload("test",{
+                                                where:{
+                                                    'userId':userId
+                                                },
+                                                page:{
+                                                    curr:1
+                                                }
+                                            });
+                                        }else{
+                                            layer.alert("取消预约失败,请联系店员处理");
+                                        }
+                                    }
+                                },
+                                dataType:'json'
+                            });
+
+                        },
+                        btn2:function(){
+                            layer.close();
+                        }
+                    });
+                    // layer.alert(JSON.stringify(data));
+                    break;
+                case 'add'://添加预约
+                    layer.open({
+                        title:'添加预约',
+                        type:2,
+                        content:'/reservationAdd',
+                        area:['700px','500px'],
+                        end:function(){
+                            table.reload("test",{
+                                where:{
+                                    'userId':userId
+                                },
+                                page:{
+                                    curr:1
+                                }
+                            });
+                        }
+                    });
+                    break;
+            };
+        });
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if(obj.event === 'edit'){
+                layer.prompt({
+                    formType: 2
+                    ,value: data.email
+                }, function(value, index){
+                    obj.update({
+                        email: value
+                    });
+                    layer.close(index);
+                });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
