@@ -52,4 +52,12 @@ public class IndexController  {
     public String vip(){
         return "vip";
     }
+    @RequestMapping(value = "/getMyOrder")
+    public String getMyOrder(){
+        return "order";
+    }
+    @RequestMapping(value = "/commentAdd")
+    public String commentAdd(){
+        return "commentAdd";
+    }
 }

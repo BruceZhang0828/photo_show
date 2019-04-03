@@ -96,8 +96,8 @@
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
 
-        <button class="layui-btn layui-btn-radius layui-btn-sm" lay-event="add">添加预约</button>
-        <button class="layui-btn layui-btn-radius layui-btn-danger layui-btn-sm" lay-event="getCheckData">取消预约</button>
+        <button class="layui-btn layui-btn-radius layui-btn-sm" lay-event="add">添加评论</button>
+        <!--<button class="layui-btn layui-btn-radius layui-btn-danger layui-btn-sm" lay-event="getCheckData">取消预约</button>-->
         <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>-->
         <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
         <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>-->
@@ -143,18 +143,10 @@
             ,where:{'userId':userId}
             ,cols: [
                 [{type: 'checkbox', fixed: 'left'},
-                {field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
-                ,{field:'username', title:'用户名', width:120}
-                ,{field:'mobile', title:'手机号', width:120}
-                ,{field:'reservationDate', title:'预约日期', width:180,templet:function(d){
-                    if(d.reservationDate){
-                        return util.toDateString(d.reservationDate, "yyyy-MM-dd HH:mm:ss");
-                        }else{
-                        return util.toDateString(d.commPosttime*1000, "yyyy-MM-dd HH:mm:ss");
-                        }
-                    }
-                }
-                ,{field:'creatDate', title:'创建日期', width:180,templet:function(d){
+                {field:'id', title:'订单ID', width:80, fixed: 'left', unresize: true, sort: true}
+                ,{field:'userName', title:'用户名', width:120}
+                ,{field:'price', title:'金额', width:120}
+                ,{field:'createDate', title:'创建日期', width:180,templet:function(d){
                     if(d.creatDate){
                         return util.toDateString(d.creatDate, "yyyy-MM-dd HH:mm:ss");
                         }else{
@@ -162,7 +154,7 @@
                         }
                     }
                 }
-                ,{field:'state', title:'状态', width:120,templet:function (d) {
+                /*,{field:'state', title:'状态', width:120,templet:function (d) {
                      if(d.state){
                          switch(d.state){
                              case 0:
@@ -180,7 +172,7 @@
                          return "未处理";
                      }
                     }}
-                    ,{field:'remarks', title:'备注信息', width:180}
+                    ,{field:'remarks', title:'备注信息', width:180}*/
                 ]
             ]
             ,page: true
@@ -230,23 +222,28 @@
                     });
                     // layer.alert(JSON.stringify(data));
                     break;
-                case 'add'://添加预约
-                    layer.open({
-                        title:'添加预约',
-                        type:2,
-                        content:'/reservationAdd',
-                        area:['700px','500px'],
-                        end:function(){
-                            table.reload("test",{
-                                where:{
-                                    'userId':userId
-                                },
-                                page:{
-                                    curr:1
-                                }
-                            });
-                        }
-                    });
+                case 'add'://添加评论
+                    //var checkStatus = table.checkStatus(obj.config.id);
+                    if (checkStatus){
+                        layer.open({
+                            title:'添加评论',
+                            type:2,
+                            content:'/commentAdd',
+                            area:['700px','500px'],
+                            end:function(){
+                                table.reload("test",{
+                                    where:{
+                                        'userId':userId
+                                    },
+                                    page:{
+                                        curr:1
+                                    }
+                                });
+                            }
+                        });
+                    }else {
+                        layui.alert("请选中一条订单");
+                    }
                     break;
             };
         });

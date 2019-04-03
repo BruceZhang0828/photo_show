@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>添加评论</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
+</head>
+<body>
+<form id="form" class="layui-form layui-form-pane"  method="post">
+    <input hidden="hidden" id="userId" name="userId" value="">
+    <input hidden="hidden" id="userName" name="userName" value="">
+    <input hidden="hidden" id="rate" name="rate" value="5">
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">评分</label>
+        <div id="test2"></div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">评价内容</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容" name="content" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <button class="layui-btn" lay-submit="" lay-filter="demo2">提交</button>
+    </div>
+</form>
+<script type="text/javascript" src="../static/js/jquery-1.12.4.min.js"></script>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+
+<script>
+
+    var user = window.localStorage.user;
+    var userId;
+    if(user){
+        if(new Date().getTime()-user.time>10*60*60*1000){
+            console.log("登录过期");
+            window.localStorage.removeItem("user");
+        }else{
+            userId = JSON.parse(user).userId;
+            userName = JSON.parse(user).userName;
+            $("#userId").val(userId);
+            $("#userName").val(userName);
+        }
+    }
+
+   /* $.ajax({
+        url:'/category/list',
+        type:'post',
+        success:function(reponse){
+            console.log("查询的出来的",reponse);
+            if("0"==reponse.code){
+                var categories = reponse.data;
+                if (categories){
+                    var len = categories.length;
+                    var str ;
+                    $("#categorySelect").empty();
+                    for (var i = 0; i <len ; i++) {
+                        str ='<option autocomplete="off" value="'+categories[i].id+'">'+categories[i].name+'</option>';
+                        $("#categorySelect").append(str);
+                    }
+                    renderForm();
+                }
+            }else{
+                alert(reponse.msg)
+            }
+        },
+        dataType:'json'
+    });*/
+
+    layui.use(['rate'],function(){
+        var rate = layui.rate;
+        //显示文字
+        rate.render({
+            elem: '#test2'
+            ,value: 5 //初始值
+            ,text: true //开启文本
+            ,choose:function (value) {
+                $("#rate").val(value);
+            }
+        });
+    });
+
+    layui.use(['form','laydate'],function(){
+        var form = layui.form,
+            layer = layui.layer,
+            laydate = layui.laydate;
+        laydate.render({
+            elem:'#date1',
+            type:'datetime'
+        });
+        form.on('submit(demo2)',function(data){
+            $.ajax({
+                url:"reservation/save",
+                data:$("#form").serialize(),
+                type:'post',
+                dataType:'json',
+                success:function(data){
+                    if(data.code=='1'){
+                        layer.msg(data.msg,{time:2000,icon:1},function(){
+                            //parent.refresh();
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index); //再执行关闭
+                        });
+                    }else{
+                        layer.msg(data.msg,{time:2000});
+                    }
+                }
+            });
+            return false;
+        });
+    });
+    //重新渲染表单
+    function renderForm(){
+        layui.use('form', function(){
+            var form = layui.form;//高版本建议把括号去掉，有的低版本，需要加()
+            form.render();
+        });
+    }
+</script>
+</body>
+</html>
