@@ -2,8 +2,10 @@ package com.zhangran.photo_show.controller;
 
 
 import com.zhangran.photo_show.entity.CommentEntity;
+import com.zhangran.photo_show.entity.OrderEntity;
 import com.zhangran.photo_show.entity.ReservationEntity;
 import com.zhangran.photo_show.service.CommentService;
+import com.zhangran.photo_show.service.OrderService;
 import com.zhangran.photo_show.service.ReservationService;
 import com.zhangran.photo_show.utils.PageResponse;
 import com.zhangran.photo_show.utils.PageUtils;
@@ -30,6 +32,9 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private OrderService orderService;
+
 
     /**
      * 保存
@@ -46,6 +51,10 @@ public class CommentController {
         }
         comment.setCreatDate(new Date());
         commentService.insert(comment);
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setId(comment.getOrderId());
+        orderEntity.setState(1);
+        orderService.updateById(orderEntity);
         return new Response("1", "评论成功");
     }
 

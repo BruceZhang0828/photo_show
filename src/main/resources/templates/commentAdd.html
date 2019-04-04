@@ -11,8 +11,9 @@
 <body>
 <form id="form" class="layui-form layui-form-pane"  method="post">
     <input hidden="hidden" id="userId" name="userId" value="">
-    <input hidden="hidden" id="userName" name="userName" value="">
+    <input hidden="hidden" id="userName" name="username" value="">
     <input hidden="hidden" id="rate" name="rate" value="5">
+    <input hidden="hidden" id="orderId" name="orderId" value="">
 
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">评分</label>
@@ -93,8 +94,9 @@
             type:'datetime'
         });
         form.on('submit(demo2)',function(data){
+            $("#orderId").val(parent.orderId);
             $.ajax({
-                url:"reservation/save",
+                url:"comment/save",
                 data:$("#form").serialize(),
                 type:'post',
                 dataType:'json',

@@ -11,6 +11,7 @@
         <result property="createDate" column="create_date"/>
         <result property="clusterId" column="cluster_id"/>
         <result property="userName" column="user_name"/>
+        <result property="state" column="state"/>
     </resultMap>
 
 

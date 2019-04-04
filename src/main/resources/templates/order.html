@@ -116,6 +116,7 @@
 <script>
     var user = window.localStorage.user;
     var userId;
+    var orderId;
     if(user){
         if(new Date().getTime()-user.time>10*60*60*1000){
             console.log("登录过期");
@@ -154,14 +155,14 @@
                         }
                     }
                 }
-                /*,{field:'state', title:'状态', width:120,templet:function (d) {
+                ,{field:'state', title:'订单状态', width:120,templet:function (d) {
                      if(d.state){
                          switch(d.state){
                              case 0:
-                                 return "未处理";
+                                 return "未评价";
                                  break;
                              case 1:
-                                 return "已经处理";
+                                 return "已评价";
                                  break;
                              case 2:
                                  return "取消预约";
@@ -172,7 +173,7 @@
                          return "未处理";
                      }
                     }}
-                    ,{field:'remarks', title:'备注信息', width:180}*/
+                    ,{field:'content', title:'评价信息', width:180}
                 ]
             ]
             ,page: true
@@ -224,7 +225,12 @@
                     break;
                 case 'add'://添加评论
                     //var checkStatus = table.checkStatus(obj.config.id);
-                    if (checkStatus){
+                    if (checkStatus.data&&checkStatus.data.length==1){
+                        orderId = checkStatus.data[0].id;
+                        var state = checkStatus.data[0].state;
+                        if (state==1){
+                            alert("已经评价");
+                            return;}
                         layer.open({
                             title:'添加评论',
                             type:2,
@@ -241,8 +247,10 @@
                                 });
                             }
                         });
+                    }else if(checkStatus&&checkStatus.data.length>1){
+                        alert("只能选中一条订单信息");
                     }else {
-                        layui.alert("请选中一条订单");
+                        alert("请选中一条订单信息");
                     }
                     break;
             };

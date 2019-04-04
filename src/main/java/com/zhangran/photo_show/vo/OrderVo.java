@@ -1,25 +1,9 @@
-package com.zhangran.photo_show.entity;
+package com.zhangran.photo_show.vo;
 
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
-
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * @author zhangran
- * @email zhangran@gmail.com
- * @date 2019-04-03 00:01:43
- */
-@TableName("zr_order")
-public class OrderEntity implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    /**
-     *
-     */
-    @TableId
+public class OrderVo {
     private Long id;
     /**
      * 用户id
@@ -43,6 +27,16 @@ public class OrderEntity implements Serializable {
     private String userName;
     /*订单状态*/
     private int state;
+    /*评价内容*/
+    private String content;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public int getState() {
         return state;
@@ -135,4 +129,5 @@ public class OrderEntity implements Serializable {
     public String getUserName() {
         return userName;
     }
+
 }

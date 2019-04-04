@@ -14,7 +14,12 @@
         <result property="creatDate" column="creat_date"/>
         <result property="state" column="state"/>
         <result property="rate" column="rate"/>
+        <result property="oderId" column="order_id"/>
     </resultMap>
+
+    <select id="selectContentByOrderId" parameterType="long" resultType="String">
+        SELECT `content` from `zr_comment` where `order_id` = #{orderId}
+    </select>
 
 
 </mapper>
