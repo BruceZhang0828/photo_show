@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
 
@@ -40,6 +41,8 @@ public class ReservationController {
             return new Response("0", "手机号不能为空");
         }
         reservation.setCreatDate(new Date());
+        reservation.setState(0);
+        reservation.setEarnestMoney(new BigDecimal(0.01));
         reservationService.insert(reservation);
         return new Response("1", "预约成功");
     }

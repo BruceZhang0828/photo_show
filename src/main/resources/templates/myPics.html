@@ -100,7 +100,8 @@
                             <li><a href="activity">店铺</a></li>
                             <!--<li><a href="/category/list">作品</a></li>-->
                             <li><a href="works">作品</a></li>
-                            <li><a id="yuyue" href="affiliate">合伙人</a></li>
+                            <li><a  href="affiliate">合伙人</a></li>
+                            <li><a  href="vip">会员中心</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">设置
                                     <span class="caret"></span></a>
@@ -113,6 +114,9 @@
                                     </li>
                                     <li class="inUser">
                                         <a href="javascript:void(0)" onclick="getReservation()">我的预约</a>
+                                        <a href="javascript:void(0)" onclick="getMyPics()">我的照片</a>
+                                        <a href="javascript:void(0)" onclick="getMyOrder()">我的订单</a>
+                                        <a href="javascript:void(0)" onclick="loginOut()">退出登录</a>
                                     </li>
                                 </ul>
                             </li>
@@ -120,12 +124,17 @@
                     </nav>
                 </div><!-- /.navbar-collapse -->
             </div>
+            <div class="aslide_l">
+                <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1070490910&site=qq&menu=yes" >
+                    <div class="aslide_a asilda">在&nbsp;线&nbsp;客&nbsp;服</div>
+                </a>
+            </div>
         </div>
     </div>
 </header>
 <div>
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-        <legend>信息流 - 滚动加载</legend>
+        <legend>我的照片</legend>
     </fieldset>
     <div class="layui-row">
         <ul class="flow-default" id="LAY_demo1">
@@ -164,6 +173,7 @@
     </div>
 </footer>
 <script type="text/javascript" src="../static/js/jquery-1.12.4.min.js"></script>
+<script src="../static/assets/js/bootstrap.js"></script>
 <script src="../static/layui/layui.js" charset="utf-8"></script>
 <script>
     var user = window.localStorage.user;
@@ -232,7 +242,36 @@ layui.use("flow",function(){
             $(".notUser").show();
         }
     });
+    function loginOut(){
+        var user = window.localStorage.user;
+        if (user){
+            window.localStorage.removeItem("user");
+            window.location.href = "/index";
+        }
+    }
 
+    function getReservation() {
+        if(userId){
+            window.location.href="/reservation";
+        }else{
+            console.log("登录过期");
+        }
+    }
+    function getMyPics() {
+        if(userId){
+            window.location.href="/myPics";
+        }else{
+            console.log("登录过期");
+        }
+    }
+
+    function getMyOrder(){
+        if(userId){
+            window.location.href="/getMyOrder";
+        }else{
+            console.log("登录过期");
+        }
+    }
 </script>
 </body>
 </html>

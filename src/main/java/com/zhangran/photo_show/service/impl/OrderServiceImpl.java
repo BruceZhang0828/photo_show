@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.zhangran.photo_show.dao.CommentDao;
 import com.zhangran.photo_show.dao.OrderDao;
 import com.zhangran.photo_show.dao.ReservationDao;
+import com.zhangran.photo_show.entity.CommentEntity;
 import com.zhangran.photo_show.entity.OrderEntity;
 import com.zhangran.photo_show.entity.ReservationEntity;
 import com.zhangran.photo_show.service.OrderService;
@@ -41,11 +42,33 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
         for (OrderEntity orderEntity:records){
             OrderVo orderVo = new OrderVo();
             BeanUtils.copyProperties(orderEntity,orderVo);
-            if (orderEntity.getState()==1){
-                orderVo.setContent(commentDao.selectContentByOrderId(orderEntity.getId()));
-            }else{
-                orderVo.setContent("无评价");
-            }
+
+                if (orderEntity.getState()==1){
+                    CommentEntity commentEntity = commentDao.selectContentByOrderId(orderEntity.getId());
+                    if (commentEntity!=null){
+                        String content = commentEntity.getContent();
+                        if (StringUtils.isNotBlank(content)){
+                            orderVo.setContent(content);
+                        }else{
+                            orderVo.setContent("无评价");
+                        }
+
+                        String reply = commentEntity.getReply();
+                        if (StringUtils.isNotBlank(reply)){
+                            orderVo.setReply(reply);
+                        }else{
+                            orderVo.setReply("无回复");
+                        }
+                    }else {
+                        orderVo.setContent("无评价");
+                        orderVo.setReply("无回复");
+                    }
+
+                }else{
+                    orderVo.setContent("无评价");
+                    orderVo.setReply("无回复");
+                }
+
             orderVos.add(orderVo);
         }
         Page<OrderVo> orderVoPage = new Page<>();

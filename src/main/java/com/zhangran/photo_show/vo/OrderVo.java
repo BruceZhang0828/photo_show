@@ -30,6 +30,16 @@ public class OrderVo {
     /*评价内容*/
     private String content;
 
+    private String reply;
+
+    public String getReply() {
+        return reply;
+    }
+
+    public void setReply(String reply) {
+        this.reply = reply;
+    }
+
     public String getContent() {
         return content;
     }

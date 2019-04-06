@@ -49,6 +49,7 @@ public class CommentController {
         if(StringUtils.isBlank(comment.getContent())){
             return new Response("0", "评论内容不能为空");
         }
+        comment.setState("待回复");
         comment.setCreatDate(new Date());
         commentService.insert(comment);
         OrderEntity orderEntity = new OrderEntity();

@@ -59,6 +59,7 @@
 								<a href="javascript:void(0)" onclick="getReservation()">我的预约</a>
 								<a href="javascript:void(0)" onclick="getMyPics()">我的照片</a>
 								<a href="javascript:void(0)" onclick="getMyOrder()">我的订单</a>
+								<a href="javascript:void(0)" onclick="loginOut()">退出登录</a>
 							</li>
 						</ul>
 					</li>
@@ -376,6 +377,13 @@
 	  
 	  );
 	});
+	function loginOut(){
+        var user = window.localStorage.user;
+        if (user){
+            window.localStorage.removeItem("user");
+            window.location.href = "/index";
+		}
+	}
 	
 	function getReservation() {
 	    if(userId){
