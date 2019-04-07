@@ -44,7 +44,7 @@
 					<!--<li><a href="/category/list">作品</a></li>-->
 					<li><a href="works">作品</a></li>
 					<li><a  href="affiliate">合伙人</a></li>
-					<li><a  href="vip">会员中心</a></li>
+					<!--<li><a  href="vip">会员中心</a></li>-->
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">设置
 							<span class="caret"></span></a>
@@ -377,36 +377,7 @@
 	  
 	  );
 	});
-	function loginOut(){
-        var user = window.localStorage.user;
-        if (user){
-            window.localStorage.removeItem("user");
-            window.location.href = "/index";
-		}
-	}
-	
-	function getReservation() {
-	    if(userId){
-            window.location.href="/reservation";
-        }else{
-	        console.log("登录过期");
-		}
-    }
-    function getMyPics() {
-	    if(userId){
-            window.location.href="/myPics";
-        }else{
-	        console.log("登录过期");
-		}
-    }
 
-    function getMyOrder(){
-        if(userId){
-            window.location.href="/getMyOrder";
-        }else{
-            console.log("登录过期");
-        }
-	}
 	/*$("#yuyue").onclick(function(){
 
 	    if(1){
